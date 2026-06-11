@@ -535,16 +535,14 @@ with tab1:
 
     if not run:
         st.markdown("Configure your organization above and click **▶ Run Transformation Analysis** to see results.")
-        st.stop()
-       
 
-    if total_pct != 100:
+    if run and total_pct != 100:
         st.error("Function percentages must total 100%.")
-        st.stop()
 
-    with st.spinner("Pulling live O*NET data and running analysis..."):
-        all_fn_results = []
-        avg_wages_list = []
+    if run and total_pct == 100:
+        with st.spinner("Pulling live O*NET data and running analysis..."):
+            all_fn_results = []
+            avg_wages_list = []
 
         for fn in selected_fns:
             fn_hc     = round(strategic_population * fn_pcts[fn] / 100)
@@ -588,449 +586,449 @@ with tab1:
             all_fn_results, avg_tenure
         )
 
-    # ── Results header ────────────────────────────────────────
-    st.markdown("---")
-    st.markdown("## Transformation Analysis Results")
-    st.markdown(
-        f"*{industry} | {strategic_population:,} strategic population | "
-        f"{ai_stage} | {province} | "
-        f"Avg tenure: {avg_tenure} yrs | "
-        f"{datetime.today().strftime('%B %d, %Y')}*"
-    )
-
-    m1, m2, m3, m4, m5 = st.columns(5)
-    m1.metric("Strategic Population",      f"{strategic_population:,}")
-    m2.metric("Total HC Released",         f"{total_released:,}")
-    m3.metric("Transformation Investment", fmt(total_transform_cost))
-    m4.metric("Cost of Inaction (24mo)",   fmt(total_inaction_24))
-    m5.metric("Resilience Score",          f"{resilience_score} / 100")
-
-    # ── Workforce Resilience Score ────────────────────────────
-    st.markdown("---")
-    st.markdown("### Workforce Resilience Score")
-    st.caption(
-        "If 20% of the workforce left tomorrow — "
-        "could the organization still operate? "
-        "Score 0–100. Higher = more resilient."
-    )
-
-    res_col1, res_col2 = st.columns([1, 3])
-    with res_col1:
-        color = (
-            "#28a745" if resilience_score >= 70 else
-            "#fd7e14" if resilience_score >= 45 else
-            "#dc3545"
-        )
-        label = (
-            "🟢 Resilient"     if resilience_score >= 70 else
-            "🟡 Moderate Risk" if resilience_score >= 45 else
-            "🔴 Critical Risk"
-        )
+        # ── Results header ────────────────────────────────────────
+        st.markdown("---")
+        st.markdown("## Transformation Analysis Results")
         st.markdown(
-            f'<div style="text-align:center; padding:20px; '
-            f'border: 2px solid {color}; border-radius:8px;">'
-            f'<h1 style="color:{color}; margin:0;">{resilience_score}</h1>'
-            f'<p style="margin:4px 0 0 0; font-weight:600;">{label}</p>'
-            f'</div>',
-            unsafe_allow_html=True
+            f"*{industry} | {strategic_population:,} strategic population | "
+            f"{ai_stage} | {province} | "
+            f"Avg tenure: {avg_tenure} yrs | "
+            f"{datetime.today().strftime('%B %d, %Y')}*"
         )
 
-    with res_col2:
-        st.markdown("**Risk Signals:**")
-        for signal in resilience_signals:
-            st.markdown(f"- {signal}")
+        m1, m2, m3, m4, m5 = st.columns(5)
+        m1.metric("Strategic Population",      f"{strategic_population:,}")
+        m2.metric("Total HC Released",         f"{total_released:,}")
+        m3.metric("Transformation Investment", fmt(total_transform_cost))
+        m4.metric("Cost of Inaction (24mo)",   fmt(total_inaction_24))
+        m5.metric("Resilience Score",          f"{resilience_score} / 100")
 
-    st.markdown(
-        '<p class="citation">'
-        'Workforce Resilience Score — original methodology by Jaini Desai. '
-        '© 2024–2026 Jaini Desai. All rights reserved.'
-        '</p>',
-        unsafe_allow_html=True
-    )
-
-    # ── Priority Index ────────────────────────────────────────
-    st.markdown("---")
-    st.markdown("### Where to Start — Transformation Priority Index")
-    st.caption(
-        "Ranked by net ROI. Highest ROI = biggest gap between "
-        "cost of inaction and transformation investment. "
-        "Cycle 1 savings fund Cycle 2."
-    )
-
-    p_rows = []
-    for i, p in enumerate(priority_index):
-        p_rows.append({
-            "Priority":                  i + 1,
-            "Function":                  p["function_name"],
-            "Avg Automation Rate":       f"{p['avg_automation']*100:.0f}%",
-            "HC Today":                  f"{p['headcount_today']:,}",
-            "HC Released":               f"{p['headcount_released']:,}",
-            "Transformation Investment": fmt(p["transform_cost"]),
-            "Cost of Inaction (24mo)":   fmt(p["inaction_24mo"]),
-            "Net ROI":                   fmt(p["net_roi"]),
-            "Recommendation":            p["label"],
-        })
-    st.dataframe(
-        pd.DataFrame(p_rows),
-        use_container_width=True, hide_index=True
-    )
-    st.markdown(
-        f'<p class="citation">'
-        f'Automation: <a href="{SOURCES["frey_osborne"]["link"]}" target="_blank">'
-        f'Frey & Osborne (2013)</a> / '
-        f'<a href="{SOURCES["onet"]["link"]}" target="_blank">O*NET</a> | '
-        f'Inaction: <a href="{SOURCES["wef"]["link"]}" target="_blank">'
-        f'WEF 2025</a> + '
-        f'<a href="{SOURCES["mckinsey"]["link"]}" target="_blank">'
-        f'McKinsey 2025</a>'
-        f'</p>',
-        unsafe_allow_html=True
-    )
-
-    # ── Function Summary ──────────────────────────────────────
-    st.markdown("---")
-    st.markdown("### Function Transformation Summary")
-
-    fn_rows = []
-    for fn in all_fn_results:
-        sizing   = fn["sizing"]
-        hc_today = sum(r["headcount_today"]    for r in sizing)
-        hc_tom   = sum(r["headcount_tomorrow"] for r in sizing)
-        hc_rel   = sum(r["headcount_released"] for r in sizing)
-        gaps     = []
-        for d in fn["decisions"]:
-            gaps.extend(d.get("skills_gap", []))
-        fn_rows.append({
-            "Function":        fn["function_name"],
-            "HC Today":        f"{hc_today:,}",
-            "HC Tomorrow":     f"{hc_tom:,}",
-            "HC Released":     f"{hc_rel:,}",
-            "Avg Wage":        fmt(fn["avg_wage_cad"]),
-            "Top Skills Gap":  gaps[0] if gaps else "No gap identified",
-            "Exposure (24mo)": fmt(fn["inaction_costs"][1]["total"]),
-        })
-    st.dataframe(
-        pd.DataFrame(fn_rows),
-        use_container_width=True, hide_index=True
-    )
-
-    # ── Capability Gap ───────────────────────────────────────
-    st.markdown("---")
-    st.markdown("### Capability Gap Analysis")
-    st.caption(
-        "Required capabilities tomorrow vs available today. "
-        "Gap drives Build / Buy / Partner recommendation per function."
-    )
-
-    for fn in all_fn_results:
-        fn_name = fn["function_name"]
-        caps    = get_capabilities_for_function(fn_name)
-
-        if not caps:
-            continue
-
-        # Summarise Build / Buy / Partner counts for header
-        build_count   = sum(1 for c in caps if c["recommendation"].startswith("Build"))
-        buy_count     = sum(1 for c in caps if c["recommendation"].startswith("Buy"))
-        partner_count = sum(1 for c in caps if c["recommendation"].startswith("Partner"))
-
-        summary_parts = []
-        if build_count:
-            summary_parts.append(f"Build: {build_count}")
-        if buy_count:
-            summary_parts.append(f"Buy: {buy_count}")
-        if partner_count:
-            summary_parts.append(f"Partner: {partner_count}")
-        summary_str = " · ".join(summary_parts) if summary_parts else "No gaps identified"
-
-        with st.expander(f"{fn_name} — {summary_str}"):
-            cap_rows = []
-            for c in caps:
-                gap = c["target_pct"] - c["current_pct"]
-                cap_rows.append({
-                    "Capability":     c["capability"],
-                    "Current":        f"{c['current_pct']}%",
-                    "Target":         f"{c['target_pct']}%",
-                    "Gap":            f"{gap}%",
-                    "Recommendation": c["recommendation"],
-                })
-            st.dataframe(
-                pd.DataFrame(cap_rows),
-                use_container_width=True,
-                hide_index=True
-            )
-
-    st.markdown(
-        '<p class="citation">'
-        'Capability Gap Analysis — Workforce Transformation Intelligence™ | '
-        '© 2024–2026 Jaini Desai. All rights reserved.'
-        '</p>',
-        unsafe_allow_html=True
-    )
-
-    # ── Role-Level Detail ─────────────────────────────────────
-    st.markdown("---")
-    st.markdown("### Role-Level Detail")
-    for fn in all_fn_results:
-        with st.expander(f"{fn['function_name']} — {fn['headcount']:,} people"):
-            r_rows = []
-            for r in fn["sizing"]:
-                _, cad, _ = get_median_wage(r["soc_code"])
-                r_rows.append({
-                    "Role":            r["title"],
-                    "SOC Code":        r["soc_code"],
-                    "Median Wage":     fmt(cad),
-                    "Automation Rate": f"{r['automation_score']*100:.0f}%",
-                    "Transform Type":  r["transform_type"],
-                    "HC Today":        f"{r['headcount_today']:,}",
-                    "HC Tomorrow":     f"{r['headcount_tomorrow']:,}",
-                    "HC Released":     f"{r['headcount_released']:,}",
-                })
-            st.dataframe(
-                pd.DataFrame(r_rows),
-                use_container_width=True, hide_index=True
-            )
-
-    # ── Reskill / Buy / Augment / Redesign ────────────────────
-    st.markdown("---")
-    st.markdown("### Transformation Path — Reskill / Buy / Augment / Redesign")
-    st.caption(
-        "Four paths per released pool. "
-        "Work Redesign Engine evaluates whether tasks should be "
-        "automated, self-served, centralized, or kept. "
-        "Company decides — tool surfaces economics and options only."
-    )
-
-    for fn in all_fn_results:
-        if not fn["decisions"]:
-            continue
-        st.markdown(f"**{fn['function_name']}**")
-
-        d_rows = []
-        for d in fn["decisions"]:
-            best = d.get("best_transfer")
-            d_rows.append({
-                "Role Pool":        d["title"],
-                "HC Released":      f"{d['headcount_released']:,}",
-                "Median Wage":      fmt(d["wage_cad"]),
-                "Recommended Path": d["recommended_path"],
-                "Adjacent Role":    best["adjacent_title"] if best else "—",
-                "JZ Gap":           best["job_zone_gap"] if best else "—",
-                "Reskill Time":     f"{best['reskilling_months']} mo" if best else "—",
-                "Reskill Cost":     fmt(best["transfer_cost_total"]) if best else "—",
-                "Prod Drag":        fmt(
-                    best["productivity_drag_per_person"] *
-                    d["headcount_released"]
-                ) if best else "—",
-                "Severance":        fmt(
-                    d["severance_per_person"] * d["headcount_released"]
-                ),
-                "Replacement":      fmt(
-                    d["replacement_per_person"] * d["headcount_released"]
-                ),
-                "Exit Cost":        fmt(d["exit_cost_total"]),
-                "Net Saving":       fmt(d["net_saving_if_transfer"]) if best else "—",
-            })
-
-        st.dataframe(
-            pd.DataFrame(d_rows),
-            use_container_width=True, hide_index=True
+        # ── Workforce Resilience Score ────────────────────────────
+        st.markdown("---")
+        st.markdown("### Workforce Resilience Score")
+        st.caption(
+            "If 20% of the workforce left tomorrow — "
+            "could the organization still operate? "
+            "Score 0–100. Higher = more resilient."
         )
 
-        # Reasoning + Work Redesign per pool
-        for d in fn["decisions"]:
-            best = d.get("best_transfer")
-            path = d["recommended_path"]
-
-            if path == "Augment":
-                r = (
-                    f"<b>{d['title']}</b> — Augment. "
-                    f"Automation {d['automation_score']*100:.0f}%. "
-                    f"Role survives. Skills gap: "
-                    f"{', '.join(d['skills_gap'][:3]) if d['skills_gap'] else 'none'}."
-                )
-                st.markdown(
-                    f'<div class="reasoning-box">{r}</div>',
-                    unsafe_allow_html=True
-                )
-            elif path == "Transfer & Reskill" and best:
-                r = (
-                    f"<b>{d['title']}</b> — Reskill & Transfer. "
-                    f"JZ gap {best['job_zone_gap']} → {best['adjacent_title']} "
-                    f"({'Bright Outlook ✓' if best['bright_outlook'] else 'stable'}). "
-                    f"{best['reskilling_months']} months. "
-                    f"Saves {fmt(d['net_saving_if_transfer'])} vs exit."
-                )
-                st.markdown(
-                    f'<div class="reasoning-box">{r}</div>',
-                    unsafe_allow_html=True
-                )
-            else:
-                r = (
-                    f"<b>{d['title']}</b> — Buy. "
-                    f"JZ gap too large. "
-                    f"Severance {fmt(d['severance_per_person'])}/person "
-                    f"({d['severance_law']}). "
-                    f"Replace at {fmt(d['replacement_per_person'])}/person."
-                )
-                st.markdown(
-                    f'<div class="reasoning-box">{r}</div>',
-                    unsafe_allow_html=True
-                )
-
-            # Work Redesign Engine output
-            auto_score = d.get("automation_score", 0.50)
-            redesign_path, redesign_desc = get_work_redesign_path(auto_score)
+        res_col1, res_col2 = st.columns([1, 3])
+        with res_col1:
+            color = (
+                "#28a745" if resilience_score >= 70 else
+                "#fd7e14" if resilience_score >= 45 else
+                "#dc3545"
+            )
+            label = (
+                "🟢 Resilient"     if resilience_score >= 70 else
+                "🟡 Moderate Risk" if resilience_score >= 45 else
+                "🔴 Critical Risk"
+            )
             st.markdown(
-                f'<div class="redesign-box">'
-                f'<b>Work Redesign Engine — {d["title"]}:</b> '
-                f'{redesign_path} — {redesign_desc}. '
-                f'Automation rate {auto_score*100:.0f}% suggests this work '
-                f'{"can be fully automated — eliminate the role category" if auto_score >= 0.85 else "is a strong candidate for self-service or shared services" if auto_score >= 0.45 else "requires human judgment — redesign the role, do not eliminate it"}.'
+                f'<div style="text-align:center; padding:20px; '
+                f'border: 2px solid {color}; border-radius:8px;">'
+                f'<h1 style="color:{color}; margin:0;">{resilience_score}</h1>'
+                f'<p style="margin:4px 0 0 0; font-weight:600;">{label}</p>'
                 f'</div>',
                 unsafe_allow_html=True
             )
 
+        with res_col2:
+            st.markdown("**Risk Signals:**")
+            for signal in resilience_signals:
+                st.markdown(f"- {signal}")
+
         st.markdown(
-            f'<p class="citation">'
-            f'Reskilling: <a href="{SOURCES["deloitte"]["link"]}" target="_blank">'
-            f'Deloitte 2026</a> | '
-            f'Drag: <a href="{SOURCES["mckinsey"]["link"]}" target="_blank">'
-            f'McKinsey 2025</a> | '
-            f'Replacement: <a href="{SOURCES["shrm"]["link"]}" target="_blank">'
-            f'SHRM 2024</a> | '
-            f'Severance: {province} — approx based on {avg_tenure} yr avg tenure | '
-            f'Work Redesign Engine © Jaini Desai 2024'
-            f'</p>',
+            '<p class="citation">'
+            'Workforce Resilience Score — original methodology by Jaini Desai. '
+            '© 2024–2026 Jaini Desai. All rights reserved.'
+            '</p>',
             unsafe_allow_html=True
         )
 
-    st.markdown("""
-<div class="boundary-note">
-<strong>On individual decisions:</strong> Which employees to reskill vs exit
-is an internal decision based on your organization's performance data,
-learning agility assessments, and manager input. The above reflects
-population-level economics only. Your HR and legal teams must calculate
-precise individual severance obligations before any action is taken.
-</div>
-""", unsafe_allow_html=True)
-
-    # ── 0-36 Month Timeline ───────────────────────────────────
-    st.markdown("---")
-    st.markdown("### 0–36 Month Cost Timeline")
-    st.caption("When each dollar lands.")
-
-    tl_rows = []
-    for fn in all_fn_results:
-        aug_hc  = sum(
-            r["headcount_today"] for r in fn["sizing"]
-            if r["transform_type"] == "Augmented"
+        # ── Priority Index ────────────────────────────────────────
+        st.markdown("---")
+        st.markdown("### Where to Start — Transformation Priority Index")
+        st.caption(
+            "Ranked by net ROI. Highest ROI = biggest gap between "
+            "cost of inaction and transformation investment. "
+            "Cycle 1 savings fund Cycle 2."
         )
-        tr_hc   = sum(
-            r["headcount_released"] for r in fn["sizing"]
-            if r["transform_type"] == "Transformed"
-        )
-        ex_hc   = sum(
-            r["headcount_released"] for r in fn["sizing"]
-            if r["transform_type"] == "Eliminated"
-        )
-        ex_cost = sum(
-            d["exit_cost_total"] for d in fn["decisions"]
-            if d["recommended_path"] != "Transfer & Reskill"
-        )
-        tl_rows.append({
-            "Function":                   fn["function_name"],
-            "0–6 mo: Augmentation":       fmt(aug_hc * 3500),
-            "HC Augmented":               f"{aug_hc:,}",
-            "6–18 mo: Reskilling":        fmt(tr_hc * 8500),
-            "6–18 mo: Productivity Drag": fmt(round(tr_hc * fn["avg_wage_cad"] * 0.23)),
-            "HC Reskilling":              f"{tr_hc:,}",
-            "18–36 mo: Exit + Replace":   fmt(ex_cost),
-            "HC Exited":                  f"{ex_hc:,}",
-        })
-    st.dataframe(
-        pd.DataFrame(tl_rows),
-        use_container_width=True, hide_index=True
-    )
 
-    # ── Skills Gap ────────────────────────────────────────────
-    st.markdown("---")
-    st.markdown("### Skills Gap by Role")
-
-    sg_rows = []
-    for fn in all_fn_results:
-        for d in fn["decisions"]:
-            sg_rows.append({
-                "Function":          fn["function_name"],
-                "Role":              d["title"],
-                "Today's Skills":    ", ".join(d["today_skills"][:4])    or "—",
-                "Tomorrow's Skills": ", ".join(d["tomorrow_skills"][:4]) or "—",
-                "Skills Gap":        ", ".join(d["skills_gap"][:4])      or "No gap",
+        p_rows = []
+        for i, p in enumerate(priority_index):
+            p_rows.append({
+                "Priority":                  i + 1,
+                "Function":                  p["function_name"],
+                "Avg Automation Rate":       f"{p['avg_automation']*100:.0f}%",
+                "HC Today":                  f"{p['headcount_today']:,}",
+                "HC Released":               f"{p['headcount_released']:,}",
+                "Transformation Investment": fmt(p["transform_cost"]),
+                "Cost of Inaction (24mo)":   fmt(p["inaction_24mo"]),
+                "Net ROI":                   fmt(p["net_roi"]),
+                "Recommendation":            p["label"],
             })
-    if sg_rows:
         st.dataframe(
-            pd.DataFrame(sg_rows),
+            pd.DataFrame(p_rows),
             use_container_width=True, hide_index=True
         )
         st.markdown(
             f'<p class="citation">'
-            f'Source: <a href="{SOURCES["onet"]["link"]}" target="_blank">'
-            f'O*NET Technology Skills + Hot Technology endpoints</a>'
+            f'Automation: <a href="{SOURCES["frey_osborne"]["link"]}" target="_blank">'
+            f'Frey & Osborne (2013)</a> / '
+            f'<a href="{SOURCES["onet"]["link"]}" target="_blank">O*NET</a> | '
+            f'Inaction: <a href="{SOURCES["wef"]["link"]}" target="_blank">'
+            f'WEF 2025</a> + '
+            f'<a href="{SOURCES["mckinsey"]["link"]}" target="_blank">'
+            f'McKinsey 2025</a>'
             f'</p>',
             unsafe_allow_html=True
         )
 
-    # ── Cost of Inaction ──────────────────────────────────────
-    st.markdown("---")
-    st.markdown("### Cost of Inaction")
-    st.caption("What it costs to do nothing as AI adoption continues.")
+        # ── Function Summary ──────────────────────────────────────
+        st.markdown("---")
+        st.markdown("### Function Transformation Summary")
 
-    ci_rows = []
-    for fn in all_fn_results:
-        for ic in fn["inaction_costs"]:
-            ci_rows.append({
-                "Function":            fn["function_name"],
-                "Timeframe":           f"{ic['months']} months",
-                "Skills Obsolescence": fmt(ic["obs_cost"]),
-                "Productivity Drag":   fmt(ic["productivity_cost"]),
-                "Salary Waste":        fmt(ic["salary_waste"]),
-                "Total":               fmt(ic["total"]),
+        fn_rows = []
+        for fn in all_fn_results:
+            sizing   = fn["sizing"]
+            hc_today = sum(r["headcount_today"]    for r in sizing)
+            hc_tom   = sum(r["headcount_tomorrow"] for r in sizing)
+            hc_rel   = sum(r["headcount_released"] for r in sizing)
+            gaps     = []
+            for d in fn["decisions"]:
+                gaps.extend(d.get("skills_gap", []))
+            fn_rows.append({
+                "Function":        fn["function_name"],
+                "HC Today":        f"{hc_today:,}",
+                "HC Tomorrow":     f"{hc_tom:,}",
+                "HC Released":     f"{hc_rel:,}",
+                "Avg Wage":        fmt(fn["avg_wage_cad"]),
+                "Top Skills Gap":  gaps[0] if gaps else "No gap identified",
+                "Exposure (24mo)": fmt(fn["inaction_costs"][1]["total"]),
             })
-    st.dataframe(
-        pd.DataFrame(ci_rows),
-        use_container_width=True, hide_index=True
-    )
-    st.markdown(
-        f'<p class="citation">'
-        f'Skills obsolescence 39%: <a href="{SOURCES["wef"]["link"]}" target="_blank">'
-        f'WEF Future of Jobs 2025</a> | '
-        f'Productivity drag 23%: <a href="{SOURCES["mckinsey"]["link"]}" target="_blank">'
-        f'McKinsey State of AI 2025</a>'
-        f'</p>',
-        unsafe_allow_html=True
-    )
+        st.dataframe(
+            pd.DataFrame(fn_rows),
+            use_container_width=True, hide_index=True
+        )
 
-    # ── Self-Funding Sequencing ───────────────────────────────
-    st.markdown("---")
-    st.markdown("### Self-Funding Transformation Sequencing")
-    st.caption("Cycle 1 savings fund Cycle 2. Additional capital after Cycle 1: $0.")
+        # ── Capability Gap ───────────────────────────────────────
+        st.markdown("---")
+        st.markdown("### Capability Gap Analysis")
+        st.caption(
+            "Required capabilities tomorrow vs available today. "
+            "Gap drives Build / Buy / Partner recommendation per function."
+        )
 
-    seq_rows = []
-    for s in sequencing:
-        seq_rows.append({
-            "Cycle":               s["cycle"],
-            "Function":            s["function"],
-            "Investment Required": fmt(s["investment"]),
-            "Net Saving":          fmt(s["net_saving"]),
-            "Cumulative Saving":   fmt(s["cumulative_saving"]),
-            "Funded By":           s["funded_by"],
-        })
-    st.dataframe(
-        pd.DataFrame(seq_rows),
-        use_container_width=True, hide_index=True
-    )
+        for fn in all_fn_results:
+            fn_name = fn["function_name"]
+            caps    = get_capabilities_for_function(fn_name)
 
-    nav_bar()
+            if not caps:
+                continue
+
+            # Summarise Build / Buy / Partner counts for header
+            build_count   = sum(1 for c in caps if c["recommendation"].startswith("Build"))
+            buy_count     = sum(1 for c in caps if c["recommendation"].startswith("Buy"))
+            partner_count = sum(1 for c in caps if c["recommendation"].startswith("Partner"))
+
+            summary_parts = []
+            if build_count:
+                summary_parts.append(f"Build: {build_count}")
+            if buy_count:
+                summary_parts.append(f"Buy: {buy_count}")
+            if partner_count:
+                summary_parts.append(f"Partner: {partner_count}")
+            summary_str = " · ".join(summary_parts) if summary_parts else "No gaps identified"
+
+            with st.expander(f"{fn_name} — {summary_str}"):
+                cap_rows = []
+                for c in caps:
+                    gap = c["target_pct"] - c["current_pct"]
+                    cap_rows.append({
+                        "Capability":     c["capability"],
+                        "Current":        f"{c['current_pct']}%",
+                        "Target":         f"{c['target_pct']}%",
+                        "Gap":            f"{gap}%",
+                        "Recommendation": c["recommendation"],
+                    })
+                st.dataframe(
+                    pd.DataFrame(cap_rows),
+                    use_container_width=True,
+                    hide_index=True
+                )
+
+        st.markdown(
+            '<p class="citation">'
+            'Capability Gap Analysis — Workforce Transformation Intelligence™ | '
+            '© 2024–2026 Jaini Desai. All rights reserved.'
+            '</p>',
+            unsafe_allow_html=True
+        )
+
+        # ── Role-Level Detail ─────────────────────────────────────
+        st.markdown("---")
+        st.markdown("### Role-Level Detail")
+        for fn in all_fn_results:
+            with st.expander(f"{fn['function_name']} — {fn['headcount']:,} people"):
+                r_rows = []
+                for r in fn["sizing"]:
+                    _, cad, _ = get_median_wage(r["soc_code"])
+                    r_rows.append({
+                        "Role":            r["title"],
+                        "SOC Code":        r["soc_code"],
+                        "Median Wage":     fmt(cad),
+                        "Automation Rate": f"{r['automation_score']*100:.0f}%",
+                        "Transform Type":  r["transform_type"],
+                        "HC Today":        f"{r['headcount_today']:,}",
+                        "HC Tomorrow":     f"{r['headcount_tomorrow']:,}",
+                        "HC Released":     f"{r['headcount_released']:,}",
+                    })
+                st.dataframe(
+                    pd.DataFrame(r_rows),
+                    use_container_width=True, hide_index=True
+                )
+
+        # ── Reskill / Buy / Augment / Redesign ────────────────────
+        st.markdown("---")
+        st.markdown("### Transformation Path — Reskill / Buy / Augment / Redesign")
+        st.caption(
+            "Four paths per released pool. "
+            "Work Redesign Engine evaluates whether tasks should be "
+            "automated, self-served, centralized, or kept. "
+            "Company decides — tool surfaces economics and options only."
+        )
+
+        for fn in all_fn_results:
+            if not fn["decisions"]:
+                continue
+            st.markdown(f"**{fn['function_name']}**")
+
+            d_rows = []
+            for d in fn["decisions"]:
+                best = d.get("best_transfer")
+                d_rows.append({
+                    "Role Pool":        d["title"],
+                    "HC Released":      f"{d['headcount_released']:,}",
+                    "Median Wage":      fmt(d["wage_cad"]),
+                    "Recommended Path": d["recommended_path"],
+                    "Adjacent Role":    best["adjacent_title"] if best else "—",
+                    "JZ Gap":           best["job_zone_gap"] if best else "—",
+                    "Reskill Time":     f"{best['reskilling_months']} mo" if best else "—",
+                    "Reskill Cost":     fmt(best["transfer_cost_total"]) if best else "—",
+                    "Prod Drag":        fmt(
+                        best["productivity_drag_per_person"] *
+                        d["headcount_released"]
+                    ) if best else "—",
+                    "Severance":        fmt(
+                        d["severance_per_person"] * d["headcount_released"]
+                    ),
+                    "Replacement":      fmt(
+                        d["replacement_per_person"] * d["headcount_released"]
+                    ),
+                    "Exit Cost":        fmt(d["exit_cost_total"]),
+                    "Net Saving":       fmt(d["net_saving_if_transfer"]) if best else "—",
+                })
+
+            st.dataframe(
+                pd.DataFrame(d_rows),
+                use_container_width=True, hide_index=True
+            )
+
+            # Reasoning + Work Redesign per pool
+            for d in fn["decisions"]:
+                best = d.get("best_transfer")
+                path = d["recommended_path"]
+
+                if path == "Augment":
+                    r = (
+                        f"<b>{d['title']}</b> — Augment. "
+                        f"Automation {d['automation_score']*100:.0f}%. "
+                        f"Role survives. Skills gap: "
+                        f"{', '.join(d['skills_gap'][:3]) if d['skills_gap'] else 'none'}."
+                    )
+                    st.markdown(
+                        f'<div class="reasoning-box">{r}</div>',
+                        unsafe_allow_html=True
+                    )
+                elif path == "Transfer & Reskill" and best:
+                    r = (
+                        f"<b>{d['title']}</b> — Reskill & Transfer. "
+                        f"JZ gap {best['job_zone_gap']} → {best['adjacent_title']} "
+                        f"({'Bright Outlook ✓' if best['bright_outlook'] else 'stable'}). "
+                        f"{best['reskilling_months']} months. "
+                        f"Saves {fmt(d['net_saving_if_transfer'])} vs exit."
+                    )
+                    st.markdown(
+                        f'<div class="reasoning-box">{r}</div>',
+                        unsafe_allow_html=True
+                    )
+                else:
+                    r = (
+                        f"<b>{d['title']}</b> — Buy. "
+                        f"JZ gap too large. "
+                        f"Severance {fmt(d['severance_per_person'])}/person "
+                        f"({d['severance_law']}). "
+                        f"Replace at {fmt(d['replacement_per_person'])}/person."
+                    )
+                    st.markdown(
+                        f'<div class="reasoning-box">{r}</div>',
+                        unsafe_allow_html=True
+                    )
+
+                # Work Redesign Engine output
+                auto_score = d.get("automation_score", 0.50)
+                redesign_path, redesign_desc = get_work_redesign_path(auto_score)
+                st.markdown(
+                    f'<div class="redesign-box">'
+                    f'<b>Work Redesign Engine — {d["title"]}:</b> '
+                    f'{redesign_path} — {redesign_desc}. '
+                    f'Automation rate {auto_score*100:.0f}% suggests this work '
+                    f'{"can be fully automated — eliminate the role category" if auto_score >= 0.85 else "is a strong candidate for self-service or shared services" if auto_score >= 0.45 else "requires human judgment — redesign the role, do not eliminate it"}.'
+                    f'</div>',
+                    unsafe_allow_html=True
+                )
+
+            st.markdown(
+                f'<p class="citation">'
+                f'Reskilling: <a href="{SOURCES["deloitte"]["link"]}" target="_blank">'
+                f'Deloitte 2026</a> | '
+                f'Drag: <a href="{SOURCES["mckinsey"]["link"]}" target="_blank">'
+                f'McKinsey 2025</a> | '
+                f'Replacement: <a href="{SOURCES["shrm"]["link"]}" target="_blank">'
+                f'SHRM 2024</a> | '
+                f'Severance: {province} — approx based on {avg_tenure} yr avg tenure | '
+                f'Work Redesign Engine © Jaini Desai 2024'
+                f'</p>',
+                unsafe_allow_html=True
+            )
+
+        st.markdown("""
+    <div class="boundary-note">
+    <strong>On individual decisions:</strong> Which employees to reskill vs exit
+    is an internal decision based on your organization's performance data,
+    learning agility assessments, and manager input. The above reflects
+    population-level economics only. Your HR and legal teams must calculate
+    precise individual severance obligations before any action is taken.
+    </div>
+    """, unsafe_allow_html=True)
+
+        # ── 0-36 Month Timeline ───────────────────────────────────
+        st.markdown("---")
+        st.markdown("### 0–36 Month Cost Timeline")
+        st.caption("When each dollar lands.")
+
+        tl_rows = []
+        for fn in all_fn_results:
+            aug_hc  = sum(
+                r["headcount_today"] for r in fn["sizing"]
+                if r["transform_type"] == "Augmented"
+            )
+            tr_hc   = sum(
+                r["headcount_released"] for r in fn["sizing"]
+                if r["transform_type"] == "Transformed"
+            )
+            ex_hc   = sum(
+                r["headcount_released"] for r in fn["sizing"]
+                if r["transform_type"] == "Eliminated"
+            )
+            ex_cost = sum(
+                d["exit_cost_total"] for d in fn["decisions"]
+                if d["recommended_path"] != "Transfer & Reskill"
+            )
+            tl_rows.append({
+                "Function":                   fn["function_name"],
+                "0–6 mo: Augmentation":       fmt(aug_hc * 3500),
+                "HC Augmented":               f"{aug_hc:,}",
+                "6–18 mo: Reskilling":        fmt(tr_hc * 8500),
+                "6–18 mo: Productivity Drag": fmt(round(tr_hc * fn["avg_wage_cad"] * 0.23)),
+                "HC Reskilling":              f"{tr_hc:,}",
+                "18–36 mo: Exit + Replace":   fmt(ex_cost),
+                "HC Exited":                  f"{ex_hc:,}",
+            })
+        st.dataframe(
+            pd.DataFrame(tl_rows),
+            use_container_width=True, hide_index=True
+        )
+
+        # ── Skills Gap ────────────────────────────────────────────
+        st.markdown("---")
+        st.markdown("### Skills Gap by Role")
+
+        sg_rows = []
+        for fn in all_fn_results:
+            for d in fn["decisions"]:
+                sg_rows.append({
+                    "Function":          fn["function_name"],
+                    "Role":              d["title"],
+                    "Today's Skills":    ", ".join(d["today_skills"][:4])    or "—",
+                    "Tomorrow's Skills": ", ".join(d["tomorrow_skills"][:4]) or "—",
+                    "Skills Gap":        ", ".join(d["skills_gap"][:4])      or "No gap",
+                })
+        if sg_rows:
+            st.dataframe(
+                pd.DataFrame(sg_rows),
+                use_container_width=True, hide_index=True
+            )
+            st.markdown(
+                f'<p class="citation">'
+                f'Source: <a href="{SOURCES["onet"]["link"]}" target="_blank">'
+                f'O*NET Technology Skills + Hot Technology endpoints</a>'
+                f'</p>',
+                unsafe_allow_html=True
+            )
+
+        # ── Cost of Inaction ──────────────────────────────────────
+        st.markdown("---")
+        st.markdown("### Cost of Inaction")
+        st.caption("What it costs to do nothing as AI adoption continues.")
+
+        ci_rows = []
+        for fn in all_fn_results:
+            for ic in fn["inaction_costs"]:
+                ci_rows.append({
+                    "Function":            fn["function_name"],
+                    "Timeframe":           f"{ic['months']} months",
+                    "Skills Obsolescence": fmt(ic["obs_cost"]),
+                    "Productivity Drag":   fmt(ic["productivity_cost"]),
+                    "Salary Waste":        fmt(ic["salary_waste"]),
+                    "Total":               fmt(ic["total"]),
+                })
+        st.dataframe(
+            pd.DataFrame(ci_rows),
+            use_container_width=True, hide_index=True
+        )
+        st.markdown(
+            f'<p class="citation">'
+            f'Skills obsolescence 39%: <a href="{SOURCES["wef"]["link"]}" target="_blank">'
+            f'WEF Future of Jobs 2025</a> | '
+            f'Productivity drag 23%: <a href="{SOURCES["mckinsey"]["link"]}" target="_blank">'
+            f'McKinsey State of AI 2025</a>'
+            f'</p>',
+            unsafe_allow_html=True
+        )
+
+        # ── Self-Funding Sequencing ───────────────────────────────
+        st.markdown("---")
+        st.markdown("### Self-Funding Transformation Sequencing")
+        st.caption("Cycle 1 savings fund Cycle 2. Additional capital after Cycle 1: $0.")
+
+        seq_rows = []
+        for s in sequencing:
+            seq_rows.append({
+                "Cycle":               s["cycle"],
+                "Function":            s["function"],
+                "Investment Required": fmt(s["investment"]),
+                "Net Saving":          fmt(s["net_saving"]),
+                "Cumulative Saving":   fmt(s["cumulative_saving"]),
+                "Funded By":           s["funded_by"],
+            })
+        st.dataframe(
+            pd.DataFrame(seq_rows),
+            use_container_width=True, hide_index=True
+        )
+
+        nav_bar()
 
 # ═══════════════════════════════════════════════════════════════
 # TAB 2 — OPTIMIZATION MODEL
