@@ -507,7 +507,11 @@ with tab1:
 
     role_overrides = {}
     if deep_dive:
-        st.caption("Default role splits from O*NET. Adjust to match your org.")
+        st.caption(
+            "Default role splits sourced from BLS Occupational Employment and Wage Statistics "
+            "(OEWS), May 2023, NAICS Sector 52 — Finance and Insurance. "
+            "Adjust percentages below to match your organization's actual distribution."
+        )
         for fn in selected_fns:
             fn_hc = round(strategic_population * fn_pcts.get(fn, 0) / 100)
             with st.expander(f"{fn} — {fn_hc:,} people"):
@@ -523,7 +527,10 @@ with tab1:
                             key=f"t1_role_{fn}_{role['soc_code']}"
                         )
                 rt = sum(fn_rp.values())
-                st.success("100% ✓") if rt == 100 else st.warning(f"{rt}%")
+                if rt == 100:
+                    st.success("100% ✓")
+                else:
+                    st.warning(f"{rt}%")
                 role_overrides[fn] = fn_rp
 
     st.markdown("---")
@@ -1102,7 +1109,10 @@ with tab2:
             )
 
     o_role_total = sum(o_role_pcts.values())
-    st.success("100% ✓") if o_role_total == 100 else st.warning(f"Total: {o_role_total}%")
+    if o_role_total == 100:
+        st.success("100% ✓")
+    else:
+        st.warning(f"Total: {o_role_total}%")
 
     o_scenario = st.radio(
         "Cost scenario",
