@@ -1,11 +1,17 @@
 """
+
 agent_onet.py
 O*NET API — Complete Data Layer
-HC Transformation Intelligence Platform
-Jaini Desai | jainidesai.com | June 2026
+Workforce Transformation Intelligence™
 
-Single source of truth for all O*NET data.
-Built from confirmed API responses — no assumptions.
+© 2024–2026 Jaini Desai. All rights reserved.
+Workforce Transformation Intelligence Platform is an original methodology by Jaini Desai.
+Employee Lifetime Value™ (ELV) and Leadership Momentum Index™ (LMI) are original
+frameworks by Jaini Desai (2024). Unauthorized reproduction or commercial use
+without written permission is prohibited.
+
+Confirmed response structures from live API testing June 10, 2026.
+All endpoints tested and verified.
 """
 
 import requests
@@ -13,9 +19,9 @@ import json
 import os
 from datetime import datetime
 
-
 # ── Credentials ───────────────────────────────────────────────
-API_KEY  = os.getenv("ONET_PASSWORD", "f3gB5-DGRYM-H3EGe-atz4K")
+import os
+API_KEY  = os.environ.get("ONET_API_KEY", "f3gB5-DGRYM-H3EGe-atz4K")
 BASE_URL = "https://api-v2.onetcenter.org/online/"
 HEADERS  = {"X-API-Key": API_KEY, "Accept": "application/json"}
 
@@ -25,6 +31,7 @@ BOC_RATE_DATE  = "June 10, 2026"
 
 # ── Automation scores ─────────────────────────────────────────
 # Source: Frey & Osborne (2013) calibrated against O*NET occupation data
+# Published: https://www.oxfordmartin.ox.ac.uk/downloads/academic/The_Future_of_Employment.pdf
 AUTOMATION_SCORES = {
     "43-9021.00": 0.99, "43-3031.00": 0.98, "43-4051.00": 0.55,
     "43-5061.00": 0.73, "13-2011.00": 0.94, "13-2051.00": 0.23,
@@ -37,11 +44,12 @@ AUTOMATION_SCORES = {
     "43-5071.00": 0.86, "41-2031.00": 0.92, "11-2022.00": 0.13,
     "11-2021.00": 0.14, "41-3091.00": 0.61, "43-4171.00": 0.96,
     "13-2054.00": 0.18, "13-2052.00": 0.58, "11-3111.00": 0.12,
-    "43-4161.00": 0.89,
+    "43-4161.00": 0.89, "27-3031.00": 0.18, "13-1161.00": 0.61,
+    "13-1081.00": 0.33,
 }
 
 # ── Job Zone fallbacks ────────────────────────────────────────
-# Used when live API call fails. Source: O*NET OnLine
+# Source: O*NET OnLine — https://www.onetcenter.org
 JOB_ZONES = {
     "43-9021.00": 1, "43-3031.00": 2, "43-4051.00": 2,
     "13-2051.00": 4, "13-2011.00": 4, "13-2061.00": 4,
@@ -50,11 +58,13 @@ JOB_ZONES = {
     "11-3121.00": 4, "13-1151.00": 3, "13-1141.00": 3,
     "11-1021.00": 4, "13-1111.00": 4, "41-2031.00": 2,
     "43-5071.00": 2, "11-2021.00": 4, "11-2022.00": 4,
-    "11-3111.00": 4, "43-4161.00": 2,
+    "11-3111.00": 4, "43-4161.00": 2, "27-3031.00": 3,
+    "13-1161.00": 4, "13-1081.00": 4,
 }
 
 # ── Median wages (USD annual) ─────────────────────────────────
 # Source: O*NET BLS Occupational Employment Statistics
+# https://www.onetcenter.org/developers.html
 WAGES_USD = {
     "43-9021.00": 36000,  "43-3031.00": 42000,
     "43-4051.00": 38000,  "13-2051.00": 96000,
@@ -67,15 +77,24 @@ WAGES_USD = {
     "13-1111.00": 93000,  "41-2031.00": 30000,
     "43-5071.00": 37000,  "11-2021.00": 133000,
     "11-2022.00": 127000, "11-3111.00": 127000,
-    "43-4161.00": 43000,
+    "43-4161.00": 43000,  "27-3031.00": 58000,
+    "13-1161.00": 65000,  "13-1081.00": 77000,
+    "43-5061.00": 48000,  "13-2054.00": 99000,
+    "15-1244.00": 90000,  "15-1299.00": 97000,
+    "15-1231.00": 57000,  "41-4012.00": 62000,
+    "41-3091.00": 40000,  "43-4171.00": 33000,
 }
 
-# ── Pagination handler ────────────────────────────────────────
+# ═══════════════════════════════════════════════════════════════
+# CORE API LAYER
+# ═══════════════════════════════════════════════════════════════
+
 def _get_all_pages(endpoint, result_key, max_pages=5):
     """
     Fetches all pages for a paginated O*NET endpoint.
     O*NET returns 5 items per page by default.
     Follows 'next' URL until no more pages or max_pages reached.
+    Confirmed working June 10, 2026.
     """
     all_results = []
     url = f"{BASE_URL}{endpoint}"
@@ -85,7 +104,7 @@ def _get_all_pages(endpoint, result_key, max_pages=5):
             r = requests.get(url, headers=HEADERS, timeout=10)
             if r.status_code != 200:
                 break
-            data = r.json()
+            data  = r.json()
             items = data.get(result_key, [])
             all_results.extend(items)
             next_url = data.get("next")
@@ -97,7 +116,7 @@ def _get_all_pages(endpoint, result_key, max_pages=5):
 
     return all_results
 
-# ── Single page call ──────────────────────────────────────────
+
 def _get(endpoint):
     """Single API call for non-paginated endpoints."""
     try:
@@ -112,33 +131,56 @@ def _get(endpoint):
     except Exception:
         return None
 
-# ── Connection test ───────────────────────────────────────────
+
 def test_connection():
+    """Verify O*NET API is reachable."""
     return _get("occupations/13-2051.00") is not None
 
-# ── Detailed Work Activities ──────────────────────────────────
-# Confirmed response key: "activity"
-# Confirmed fields: id, title
+# ═══════════════════════════════════════════════════════════════
+# O*NET ENDPOINTS — ALL CONFIRMED FROM LIVE API
+# ═══════════════════════════════════════════════════════════════
+
 def get_detailed_work_activities(soc_code):
+    """
+    Granular task breakdown per occupation.
+    Foundation of task-level automation analysis.
+    Confirmed response key: "activity"
+    Confirmed fields: id, title
+    Total for 13-1141.00: 17 DWAs across 4 pages
+    """
     items = _get_all_pages(
         f"occupations/{soc_code}/summary/detailed_work_activities",
         result_key="activity"
     )
-    return [{"id": i.get("id", ""), "title": i.get("title", "")} for i in items]
+    return [
+        {"id": i.get("id", ""), "title": i.get("title", "")}
+        for i in items
+    ]
 
-# ── Tasks ─────────────────────────────────────────────────────
-# Confirmed response key: "task"
-# Confirmed fields: id, title
+
 def get_tasks(soc_code):
+    """
+    Full task list for the occupation.
+    Confirmed response key: "task"
+    Confirmed fields: id, title
+    Total for 13-1141.00: 22 tasks
+    """
     items = _get_all_pages(
         f"occupations/{soc_code}/summary/tasks",
         result_key="task"
     )
-    return [{"id": i.get("id", ""), "title": i.get("title", "")} for i in items]
+    return [
+        {"id": i.get("id", ""), "title": i.get("title", "")}
+        for i in items
+    ]
 
-# ── Job Zone ──────────────────────────────────────────────────
-# Confirmed response: {"job_zone": {"value": 3, ...}}
+
 def get_job_zone(soc_code):
+    """
+    Complexity level 1-5. Drives reskilling time and feasibility.
+    Confirmed response: {"job_zone": {"value": 3, ...}}
+    Falls back to JOB_ZONES dict if API unavailable.
+    """
     data = _get(f"occupations/{soc_code}/summary/job_zone")
     if data:
         jz = data.get("job_zone", {})
@@ -148,26 +190,36 @@ def get_job_zone(soc_code):
             return jz
     return JOB_ZONES.get(soc_code, 3)
 
-# ── Related Occupations ───────────────────────────────────────
-# Confirmed response key: "occupation"
-# Confirmed fields: code, title, tags.bright_outlook
+
 def get_related_occupations(soc_code):
+    """
+    Adjacent roles from O*NET adjacency map.
+    Primary source for Layer 2 transfer options.
+    Confirmed response key: "occupation"
+    Confirmed fields: code, title, tags.bright_outlook
+    Total for 13-1141.00: 10 related occupations
+    """
     items = _get_all_pages(
         f"occupations/{soc_code}/summary/related_occupations",
         result_key="occupation"
     )
     return [
         {
-            "soc_code":      i.get("code", ""),
-            "title":         i.get("title", ""),
+            "soc_code":       i.get("code", ""),
+            "title":          i.get("title", ""),
             "bright_outlook": i.get("tags", {}).get("bright_outlook", False)
         }
         for i in items
     ]
 
-# ── Technology Skills — today ─────────────────────────────────
-# Confirmed response key: "category" → "example" → "title"
+
 def get_technology_skills(soc_code):
+    """
+    Current tools and technologies used in this role.
+    Represents today's skill profile.
+    Confirmed response key: "category" → "example" → "title"
+    Confirmed for 13-1141.00: Microsoft Dynamics, Oracle PeopleSoft, SAP
+    """
     items = _get_all_pages(
         f"occupations/{soc_code}/summary/technology_skills",
         result_key="category"
@@ -180,83 +232,161 @@ def get_technology_skills(soc_code):
                 skills.append(name)
     return skills
 
-# ── Hot Technology — tomorrow ─────────────────────────────────
-# Confirmed response key: "example"
-# Confirmed fields: title, hot_technology (bool), in_demand (bool), percentage
-# Single page — returns all results at once (total=17, end=17)
+
 def get_hot_technology(soc_code):
+    """
+    Emerging tools — tomorrow's skill requirements.
+    Confirmed response key: "example" (NOT "technology")
+    Confirmed fields: title, hot_technology (bool),
+                      in_demand (bool), percentage (int)
+    Single page — returns all results at once (no pagination needed)
+    Confirmed for 13-1141.00: 17 items including Microsoft Excel
+    """
     data = _get(f"occupations/{soc_code}/hot_technology")
     if not data:
         return []
     return [
         {
-            "title":       item.get("title", "").strip(),
-            "in_demand":   item.get("in_demand", False),
-            "percentage":  item.get("percentage", 0)
+            "title":      item.get("title", "").strip(),
+            "in_demand":  item.get("in_demand", False),
+            "percentage": item.get("percentage", 0)
         }
         for item in data.get("example", [])
         if item.get("title", "").strip()
     ]
 
-# ── Automation score ──────────────────────────────────────────
+
+def get_skill_gap_percentages(soc_code):
+    """
+    Returns skills in tomorrow's hot technology NOT in today's skills.
+    Each item includes O*NET percentage field — the share of job
+    postings requiring that skill.
+
+    This percentage drives task-level productivity drag:
+    drag = salary × (percentage/100) × (reskilling_months/12)
+
+    More precise than flat 23% organizational average.
+    Source: O*NET Hot Technology endpoint (percentage field)
+
+    © Jaini Desai — used in ELV™ Skill Adjacency calculation
+    """
+    today = set(get_technology_skills(soc_code))
+    hot   = get_hot_technology(soc_code)
+    return [
+        {
+            "skill":      item["title"],
+            "percentage": item["percentage"],
+            "in_demand":  item["in_demand"],
+        }
+        for item in hot
+        if item["title"] not in today
+    ]
+
+
+def get_dwa_overlap_score(soc_current, soc_target):
+    """
+    Domain transferability score between two roles.
+    Measures what percentage of the TARGET role's DWAs
+    are also present in the CURRENT role.
+
+    High overlap = strong domain transfer.
+    Person already performs similar work.
+    Reskilling fills specific skill gaps only.
+
+    Low overlap = domain gap too wide.
+    Reskilling alone insufficient. Buy recommended.
+
+    Threshold: overlap >= 0.30 = transformable
+    Used as Filter 1 in the PuLP optimization model.
+
+    Source: O*NET Detailed Work Activities endpoint
+    © Jaini Desai — core input to ELV™ Skill Adjacency Score
+    """
+    current_ids = {d["id"] for d in get_detailed_work_activities(soc_current)}
+    target_ids  = {d["id"] for d in get_detailed_work_activities(soc_target)}
+
+    if not target_ids:
+        return 0.0
+
+    overlap = current_ids.intersection(target_ids)
+    return round(len(overlap) / len(target_ids), 3)
+
+
 def get_automation_score(soc_code):
-    score = AUTOMATION_SCORES.get(soc_code, 0.50)
-    source = "Frey & Osborne (2013) / O*NET" if soc_code in AUTOMATION_SCORES else "Benchmark Estimate"
+    """
+    Automation probability for this occupation.
+    Source: Frey & Osborne (2013) calibrated against O*NET.
+    Returns (score, source_label).
+    """
+    score  = AUTOMATION_SCORES.get(soc_code, 0.50)
+    source = (
+        "Frey & Osborne (2013) / O*NET"
+        if soc_code in AUTOMATION_SCORES
+        else "Benchmark Estimate"
+    )
     return score, source
 
-# ── Median wage ───────────────────────────────────────────────
+
 def get_median_wage(soc_code):
-    usd = WAGES_USD.get(soc_code, 65000)
-    cad = round(usd * BOC_USD_TO_CAD)
+    """
+    Median annual wage USD → CAD.
+    Source: O*NET BLS Occupational Employment Statistics
+    Conversion: Bank of Canada rate June 10, 2026
+    Returns (usd, cad, source_label).
+    """
+    usd    = WAGES_USD.get(soc_code, 65000)
+    cad    = round(usd * BOC_USD_TO_CAD)
     source = f"O*NET BLS Wage Data → CAD @ Bank of Canada {BOC_RATE_DATE}"
     return usd, cad, source
 
-# ── Full role profile ─────────────────────────────────────────
+
 def get_full_role_profile(soc_code):
     """
-    Complete data pull for one SOC code.
-    Called by transformation engine per role.
+    Complete profile for one SOC code.
+    Calls all endpoints. Used by transformation engine per role.
+    Returns structured dict with all data needed for calculation.
     """
-    auto_score, auto_source  = get_automation_score(soc_code)
-    usd, cad, wage_source    = get_median_wage(soc_code)
-    job_zone                 = get_job_zone(soc_code)
-    dwas                     = get_detailed_work_activities(soc_code)
-    tasks                    = get_tasks(soc_code)
-    related                  = get_related_occupations(soc_code)
-    today_skills             = get_technology_skills(soc_code)
-    hot_tech                 = get_hot_technology(soc_code)
+    auto_score, auto_source = get_automation_score(soc_code)
+    usd, cad, wage_source   = get_median_wage(soc_code)
+    job_zone                = get_job_zone(soc_code)
+    dwas                    = get_detailed_work_activities(soc_code)
+    tasks                   = get_tasks(soc_code)
+    related                 = get_related_occupations(soc_code)
+    today_skills            = get_technology_skills(soc_code)
+    hot_tech                = get_hot_technology(soc_code)
+    skill_gap_pcts          = get_skill_gap_percentages(soc_code)
 
-    # Tomorrow skills = all hot technology items
-    tomorrow_skills = [h["title"] for h in hot_tech]
-
-    # In-demand = hot tech items where in_demand is True
+    tomorrow_skills  = [h["title"] for h in hot_tech]
     in_demand_skills = [h["title"] for h in hot_tech if h["in_demand"]]
-
-    # Skills gap = tomorrow skills not present in today
-    skills_gap = [s for s in tomorrow_skills if s not in today_skills]
+    skills_gap       = [s["skill"] for s in skill_gap_pcts]
 
     return {
-        "soc_code":           soc_code,
-        "automation_score":   auto_score,
-        "automation_source":  auto_source,
-        "job_zone":           job_zone,
-        "wage_usd":           usd,
-        "wage_cad":           cad,
-        "wage_source":        wage_source,
-        "dwas":               dwas,
-        "tasks":              tasks,
-        "related_occupations": related,
-        "today_skills":       today_skills,
-        "tomorrow_skills":    tomorrow_skills,
-        "in_demand_skills":   in_demand_skills,
-        "skills_gap":         skills_gap,
-        "dwa_count":          len(dwas),
-        "task_count":         len(tasks),
+        "soc_code":              soc_code,
+        "automation_score":      auto_score,
+        "automation_source":     auto_source,
+        "job_zone":              job_zone,
+        "wage_usd":              usd,
+        "wage_cad":              cad,
+        "wage_source":           wage_source,
+        "dwas":                  dwas,
+        "tasks":                 tasks,
+        "related_occupations":   related,
+        "today_skills":          today_skills,
+        "tomorrow_skills":       tomorrow_skills,
+        "in_demand_skills":      in_demand_skills,
+        "skills_gap":            skills_gap,
+        "skill_gap_percentages": skill_gap_pcts,
+        "dwa_count":             len(dwas),
+        "task_count":            len(tasks),
     }
 
-# ── Cache layer ───────────────────────────────────────────────
+
 def get_cached_profile(soc_code, cache_dir="data"):
-    """Load from cache if available, pull live and cache if not."""
+    """
+    Load from cache if available. Pull live and cache if not.
+    Reduces API calls on repeated runs.
+    Cache stored in data/profile_{soc_code}.json
+    """
     os.makedirs(cache_dir, exist_ok=True)
     cache_path = os.path.join(
         cache_dir,
@@ -272,7 +402,11 @@ def get_cached_profile(soc_code, cache_dir="data"):
 
     return profile
 
-# ── Self-test ─────────────────────────────────────────────────
+
+# ═══════════════════════════════════════════════════════════════
+# SELF-TEST
+# ═══════════════════════════════════════════════════════════════
+
 if __name__ == "__main__":
     print("=" * 60)
     print("  AGENT ONET — FULL ENDPOINT TEST")
@@ -298,11 +432,21 @@ if __name__ == "__main__":
         print(f"Tasks pulled       : {profile['task_count']}")
         print(f"Today skills       : {profile['today_skills'][:3]}")
         print(f"Tomorrow skills    : {profile['tomorrow_skills'][:3]}")
-        print(f"In-demand skills   : {profile['in_demand_skills'][:3]}")
-        print(f"Skills gap         : {profile['skills_gap'][:5]}")
+        print(f"Skill gap w/ pct   : {profile['skill_gap_percentages'][:3]}")
         print(f"Related roles      :")
         for r in profile["related_occupations"][:5]:
             bo = "✅ Bright Outlook" if r["bright_outlook"] else ""
             print(f"  {r['soc_code']} — {r['title']} {bo}")
 
+        print("\n── DWA Overlap Test ──")
+        target  = "13-1071.00"
+        overlap = get_dwa_overlap_score(soc, target)
+        print(f"Overlap {soc} → {target}: {overlap:.1%}")
+
+        print("\n── Skill Gap Percentages ──")
+        gaps = get_skill_gap_percentages(soc)
+        for g in gaps[:5]:
+            print(f"  {g['skill']}: {g['percentage']}% of job postings")
+
         print("\n✅ Agent ready")
+        
