@@ -1,0 +1,218 @@
+{
+  "Operations": {
+    "displacement_score": 0.812,
+    "occupations": [
+      {
+        "soc_code": "43-9021.00",
+        "title": "Data Entry Keyers",
+        "automation_probability": 0.99
+      },
+      {
+        "soc_code": "43-3031.00",
+        "title": "Bookkeeping & Accounting Clerks",
+        "automation_probability": 0.98
+      },
+      {
+        "soc_code": "43-4051.00",
+        "title": "Customer Service Representatives",
+        "automation_probability": 0.55
+      },
+      {
+        "soc_code": "43-5061.00",
+        "title": "Production, Planning & Expediting Clerks",
+        "automation_probability": 0.73
+      }
+    ],
+    "source": "O*NET Web Services + Frey & Osborne (2013)",
+    "pulled_at": "2026-06-09T18:22:09.281550"
+  },
+  "Finance & Risk": {
+    "displacement_score": 0.58,
+    "occupations": [
+      {
+        "soc_code": "13-2011.00",
+        "title": "Accountants and Auditors",
+        "automation_probability": 0.94
+      },
+      {
+        "soc_code": "13-2051.00",
+        "title": "Financial Analysts",
+        "automation_probability": 0.23
+      },
+      {
+        "soc_code": "13-2061.00",
+        "title": "Financial Examiners",
+        "automation_probability": 0.61
+      },
+      {
+        "soc_code": "13-2099.00",
+        "title": "Financial Specialists",
+        "automation_probability": 0.54
+      }
+    ],
+    "source": "O*NET Web Services + Frey & Osborne (2013)",
+    "pulled_at": "2026-06-09T18:22:09.281746"
+  },
+  "Compliance & Legal": {
+    "displacement_score": 0.477,
+    "occupations": [
+      {
+        "soc_code": "13-1041.00",
+        "title": "Compliance Officers",
+        "automation_probability": 0.35
+      },
+      {
+        "soc_code": "23-1011.00",
+        "title": "Lawyers",
+        "automation_probability": 0.04
+      },
+      {
+        "soc_code": "23-2011.00",
+        "title": "Paralegals",
+        "automation_probability": 0.94
+      },
+      {
+        "soc_code": "13-1041.04",
+        "title": "Government Property Inspectors",
+        "automation_probability": 0.58
+      }
+    ],
+    "source": "O*NET Web Services + Frey & Osborne (2013)",
+    "pulled_at": "2026-06-09T18:22:09.281933"
+  },
+  "Technology": {
+    "displacement_score": 0.172,
+    "occupations": [
+      {
+        "soc_code": "15-1252.00",
+        "title": "Software Developers",
+        "automation_probability": 0.04
+      },
+      {
+        "soc_code": "15-1231.00",
+        "title": "Computer Network Support Specialists",
+        "automation_probability": 0.25
+      },
+      {
+        "soc_code": "15-1244.00",
+        "title": "Network & Computer Systems Administrators",
+        "automation_probability": 0.25
+      },
+      {
+        "soc_code": "15-1299.00",
+        "title": "Computer Occupations, All Other",
+        "automation_probability": 0.15
+      }
+    ],
+    "source": "O*NET Web Services + Frey & Osborne (2013)",
+    "pulled_at": "2026-06-09T18:22:09.282101"
+  },
+  "Human Resources": {
+    "displacement_score": 0.285,
+    "occupations": [
+      {
+        "soc_code": "13-1071.00",
+        "title": "Human Resources Specialists",
+        "automation_probability": 0.55
+      },
+      {
+        "soc_code": "11-3121.00",
+        "title": "Human Resources Managers",
+        "automation_probability": 0.16
+      },
+      {
+        "soc_code": "13-1151.00",
+        "title": "Training & Development Specialists",
+        "automation_probability": 0.26
+      },
+      {
+        "soc_code": "13-1141.00",
+        "title": "Compensation & Benefits Managers",
+        "automation_probability": 0.17
+      }
+    ],
+    "source": "O*NET Web Services + Frey & Osborne (2013)",
+    "pulled_at": "2026-06-09T18:22:09.282280"
+  },
+  "Customer Experience": {
+    "displacement_score": 0.565,
+    "occupations": [
+      {
+        "soc_code": "43-4051.00",
+        "title": "Customer Service Representatives",
+        "automation_probability": 0.55
+      },
+      {
+        "soc_code": "41-3091.00",
+        "title": "Sales Representatives",
+        "automation_probability": 0.61
+      },
+      {
+        "soc_code": "43-4171.00",
+        "title": "Receptionists & Information Clerks",
+        "automation_probability": 0.96
+      },
+      {
+        "soc_code": "11-2021.00",
+        "title": "Marketing Managers",
+        "automation_probability": 0.14
+      }
+    ],
+    "source": "O*NET Web Services + Frey & Osborne (2013)",
+    "pulled_at": "2026-06-09T18:22:09.282455"
+  },
+  "Strategy & Analytics": {
+    "displacement_score": 0.085,
+    "occupations": [
+      {
+        "soc_code": "15-2051.00",
+        "title": "Data Scientists",
+        "automation_probability": 0.02
+      },
+      {
+        "soc_code": "15-2041.00",
+        "title": "Statisticians",
+        "automation_probability": 0.03
+      },
+      {
+        "soc_code": "13-1111.00",
+        "title": "Management Analysts",
+        "automation_probability": 0.13
+      },
+      {
+        "soc_code": "11-1021.00",
+        "title": "General & Operations Managers",
+        "automation_probability": 0.16
+      }
+    ],
+    "source": "O*NET Web Services + Frey & Osborne (2013)",
+    "pulled_at": "2026-06-09T18:22:09.282612"
+  },
+  "Sales & Distribution": {
+    "displacement_score": 0.657,
+    "occupations": [
+      {
+        "soc_code": "41-4012.00",
+        "title": "Sales Representatives, Wholesale",
+        "automation_probability": 0.72
+      },
+      {
+        "soc_code": "43-5071.00",
+        "title": "Shipping, Receiving & Inventory Clerks",
+        "automation_probability": 0.86
+      },
+      {
+        "soc_code": "41-2031.00",
+        "title": "Retail Salespersons",
+        "automation_probability": 0.92
+      },
+      {
+        "soc_code": "11-2022.00",
+        "title": "Sales Managers",
+        "automation_probability": 0.13
+      }
+    ],
+    "source": "O*NET Web Services + Frey & Osborne (2013)",
+    "pulled_at": "2026-06-09T18:22:09.282788"
+  }
+}

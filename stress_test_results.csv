@@ -1,0 +1,4 @@
+scenario,employees_at_risk,financial_exposure,recovery_months,risk_rating
+AI Displacement,1719,326722541,39.307306825876225,CRITICAL
+Leadership Exodus,832,503967646,12.0,CRITICAL
+Skills Obsolescence,5291,44973500,13.993797253626548,CRITICAL

@@ -1,0 +1,1074 @@
+{
+  "reskilling_cost_per_employee": {
+    "value": 8500,
+    "unit": "CAD",
+    "source": "Deloitte 2026 Global Human Capital Trends",
+    "citation": "Average total cost of meaningful upskilling including lost productivity and coaching",
+    "verified_from_pdf": true,
+    "pulled_at": "2026-06-09T18:39:09.612202"
+  },
+  "productivity_drop_during_transition": {
+    "value": 0.23,
+    "unit": "percentage",
+    "source": "McKinsey State of AI 2025",
+    "citation": "Organizations lose 20-25% productivity while employees are mid-reskilling",
+    "verified_from_pdf": true,
+    "pulled_at": "2026-06-09T18:39:09.612215"
+  },
+  "productivity_recovery_months": {
+    "value": 14,
+    "unit": "months",
+    "source": "McKinsey State of AI 2025",
+    "citation": "Average recovery timeline during AI transformation programs",
+    "verified_from_pdf": true,
+    "pulled_at": "2026-06-09T18:39:09.612218"
+  },
+  "leadership_replacement_cost_multiplier": {
+    "value": 2.0,
+    "unit": "multiplier",
+    "source": "SHRM Workforce Benchmark 2024",
+    "citation": "Total replacement cost for Director+ including recruiting and onboarding",
+    "verified_from_pdf": false,
+    "pulled_at": "2026-06-09T18:39:09.612219"
+  },
+  "leadership_exodus_rate_post_restructuring": {
+    "value": 0.4,
+    "unit": "percentage",
+    "source": "Korn Ferry / Mercer Post-Restructuring Research 2023",
+    "citation": "35-45% of senior leaders exit within 12 months of major organizational change",
+    "verified_from_pdf": false,
+    "pulled_at": "2026-06-09T18:39:09.612221"
+  },
+  "cascade_multiplier": {
+    "value": 2.3,
+    "unit": "multiplier",
+    "source": "Organizational Network Analysis \u2014 Cross, Borgatti & Parker",
+    "citation": "Every departing leader creates 2.3 downstream disruptions on average",
+    "verified_from_pdf": false,
+    "pulled_at": "2026-06-09T18:39:09.612222"
+  },
+  "near_term_automation_rate": {
+    "value": 0.3,
+    "unit": "percentage",
+    "source": "McKinsey Global Institute 2024",
+    "citation": "Realistic near-term automation rate for financial services",
+    "verified_from_pdf": true,
+    "pulled_at": "2026-06-09T18:39:09.612224"
+  },
+  "skills_obsolescence_rate_by_2028": {
+    "value": 0.39,
+    "unit": "percentage",
+    "source": "WEF Future of Jobs Report 2025",
+    "citation": "39% of current skill sets will transform or become outdated by 2030",
+    "verified_from_pdf": true,
+    "pulled_at": "2026-06-09T18:39:09.612225"
+  },
+  "jobs_displaced_globally": {
+    "value": 92000000,
+    "unit": "jobs",
+    "source": "WEF Future of Jobs Report 2025",
+    "citation": "92 million jobs projected to be displaced by 2030",
+    "verified_from_pdf": true,
+    "pulled_at": "2026-06-09T18:39:09.612226"
+  },
+  "orgs_with_meaningful_ai_progress": {
+    "value": 0.06,
+    "unit": "percentage",
+    "source": "Deloitte 2026 Global Human Capital Trends",
+    "citation": "Only 6% of organizations report meaningful progress in human-AI interactions",
+    "verified_from_pdf": true,
+    "pulled_at": "2026-06-09T18:39:09.612228"
+  },
+  "pdf_passages": {
+    "deloitte_2026": {
+      "source": "Deloitte 2026 Global Human Capital Trends",
+      "pages_read": 50,
+      "findings": [
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 4,
+          "passage": "From tensions to tipping points: Choosing the human advantage The 2026 Global Human Capital Trends survey reveals the intentional choices organizations can make to adapt continuously, move with speed,"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 4,
+          "passage": "From tensions to tipping points: Choosing the human advantage The 2026 Global Human Capital Trends survey reveals the intentional choices organizations can make to adapt continuously, move with speed,"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 6,
+          "passage": "Organizations that succeed will likely not be those that automate the fastest, but those The boundaries between humans and machines are blurring"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 6,
+          "passage": "And as strategy and selves against misinformation and untrustworthy outputs in a world execution merge, organizations will likely need to move beyond where AI is both a collaborator and a risk? struct"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "artificial intelligence",
+          "page": 10,
+          "passage": "Getting human and machine relationships right To multiply human potential with AI, organizations can deliberately design human and machine interactions Nic Scoble-Williams, Sue Cantrell, David Mallon,"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 11,
+          "passage": "But dedicating 90% of the full rollout budget to redesigning The scaffolding for intentional interaction design human-AI interactions\u2014new workflows, trust thresholds, escalation paths, and robust trai"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 13,
+          "passage": "When rapid AI automation threatened to make the compa- engagement, and an ambassador network"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 13,
+          "passage": "When rapid AI automation threatened to make the compa- engagement, and an ambassador network"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 13,
+          "passage": "Figure 3 Micro dimensions of work design Dimension Examples of hard wiring Examples of soft wiring Work \u2022Job/role design \u2022Management practices What specific work journeys or flows are in scope? \u2022Job a"
+        },
+        {
+          "category": "skills_obsolescence",
+          "term": "obsolete",
+          "page": 13,
+          "passage": "The organization also ny\u2019s specialized recruiter role obsolete, it used the rollout of \u201cRita\u201d\u2014 established clear guardrails on when and how to use gen AI"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 14,
+          "passage": "Figure 4 The many ways to design human-machine interactions High AI AI as a boss, with the human being directed, allocated, and monitored by AI that sets priorities and manages authority performance, "
+        },
+        {
+          "category": "ai_adoption",
+          "term": "artificial intelligence",
+          "page": 18,
+          "passage": "3 Though Graphite reports that 86% of the top-ranking pages on Google are Generative artificial intelligence and agentic systems still human-written,4 this synthetic wave could can now produce content"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 20,
+          "passage": "8 there is growing concern that they may lose critical judgment14 and domain expertise,15 disempowering and deskilling themselves in Meanwhile, automation has created a \u201cbot-versus-bot\u201d dynamic: the p"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 20,
+          "passage": "Forty-one percent say they have used AI to AI-generated resumes can exaggerate a candidate\u2019s job scope or automate part of their job, often without employer awareness"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 20,
+          "passage": "When AI-generated outputs become indistinguishable the bot could not execute, according to reporting in The Register"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 21,
+          "passage": "\u201d20 AI itself can support this work through automated lineage mapping: tracking the origin, transformation, and use of data across train- ing and inference"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 22,
+          "passage": "\u201cA lot of our atten- zation were showing clear signs of fraud and that many candidates tion is on striking the right balance: We want to automate where was using deepfake technology during live interv"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 22,
+          "passage": "To address the issue, the company developed tools that allow Promoting transparency in work outputs talent acquisition and security teams to authenticate the candidates\u2019 identities continuously, ensur"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "AI adoption",
+          "page": 22,
+          "passage": "Real-time, dynamic identity authentication \u201cAs we increase AI adoption, we\u2019re vigilant about maintaining human judgment, especially for complex or sensitive decisions,\u201d When cybersecurity company Pind"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 23,
+          "passage": "\u201cAI-generated \u2018workslop\u2019 is destroying productivity,\u201d Harvard 4"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 26,
+          "passage": "Gartner projects that, by 2027, half of business decisions will be augmented or automated by AI agents"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 28,
+          "passage": "Figure 2 Elements of a decision framework Element Defining question Implications Risk profile \u2022Potential consequences and reversibility \u2022Higher risk: Greater diligence and consultation Frequency \u2022Ofte"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 29,
+          "passage": "Teams gain a clear understanding of what\u2019s automated and what requires human judgment"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 29,
+          "passage": "21 In an updated survey in managing machines as well as people: scoping agent auton- 2025, 40% say AI has caused them to think differently about omy, judging model outputs, and knowing when to overrid"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 31,
+          "passage": "Tiffany McDowell and David Mallon, \u201cGetting decision Nguyen, Erik Brynjolfsson, and Diyi Yang, \u201cFuture of work rights right: How effective decision-making can help boost with AI agents: Auditing autom"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 31,
+          "passage": "Deloitte\u2019s High Impact Decision Intelligence research includes Human oversight of automated decision-making,\u201d Sept"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "artificial intelligence",
+          "page": 31,
+          "passage": "Future of Life Institute, EU Artificial Intelligence Act, \u201cArticle attributability-gap,\u201d Science and Engineering Ethics 30 (2024)"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "artificial intelligence",
+          "page": 33,
+          "passage": "Amid rising like: Is it cheating if I use AI to do my work? What tensions in the worker-organization relationship, is hard work if AI is now doing the heavy lifting? artificial intelligence is adding "
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 34,
+          "passage": "While even the strongest cultures will likely need to be reinforced in Forbes indicates that, on Wall Street alone, industry analysts to weather the influence of AI, AI\u2019s infusion into work can furthe"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 34,
+          "passage": "While even the strongest cultures will likely need to be reinforced in Forbes indicates that, on Wall Street alone, industry analysts to weather the influence of AI, AI\u2019s infusion into work can furthe"
+        },
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 36,
+          "passage": "But understanding how we do those the deeper conversation is about reskilling and supporting people things is changing in the context of AI"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 36,
+          "passage": "The team ultimately identified nearly 40 voice concerns about automation, data privacy, and algorithmic concrete AI use cases that prioritize current employees\u2019 well-being"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 36,
+          "passage": "The team ultimately identified nearly 40 voice concerns about automation, data privacy, and algorithmic concrete AI use cases that prioritize current employees\u2019 well-being"
+        },
+        {
+          "category": "reskilling",
+          "term": "upskill",
+          "page": 37,
+          "passage": "In this environment, cling- ering targeted training and upskilling to new members of distributed ing to the cultural status quo is not a neutral choice\u2014the cultural teams with a focus on transparency "
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 37,
+          "passage": "This isn\u2019t just about process\u2014it\u2019s productivity, drives innovation, and anchors workers navigating about shaping how people connect with tools, teams, and leadership disruption"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "machine learning",
+          "page": 37,
+          "passage": "Van der Schaar AI and Machine Learning Lab at the University Dealing with AI\u2019s cultural debt 35"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "AI adoption",
+          "page": 38,
+          "passage": "James Stovall, \u201cLeadership is the key to AI adoption \u2014 16"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 40,
+          "passage": "intent into action, fluidly reconfiguring capabili- ties and capacity as business conditions, customer Scaling, for example, no longer automatically demand, or technologies shift"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "artificial intelligence",
+          "page": 40,
+          "passage": "how close collaboration between doctors and AI can help detect diseases earlier and with higher accuracy Artificial intelligence is accelerating this shift by than either humans or AI could achieve al"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 42,
+          "passage": "We expect understanding and capitalizing on the human/ enhances workers\u2019 productivity, performance, and creativity as an AI multiplier effect to grow in strategic importance"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 43,
+          "passage": "In responses to talent shortages in health care, for example, Cleveland Clinic\u2019s workforce planning group turned to As we discussed in last year\u2019s trends, another way organizations can role design, br"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 43,
+          "passage": "In responses to talent shortages in health care, for example, Cleveland Clinic\u2019s workforce planning group turned to As we discussed in last year\u2019s trends, another way organizations can role design, br"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 44,
+          "passage": "Only 11% of managers in our survey automated or augmented"
+        },
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 45,
+          "passage": "Figure 4 Evolving from cost efficiency to adaptive orchestration Adaptive Focus Cost efficiency Productivity Process redesign Value creation orchestration AI continuously optimizes org structure Task "
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 45,
+          "passage": "Figure 4 Evolving from cost efficiency to adaptive orchestration Adaptive Focus Cost efficiency Productivity Process redesign Value creation orchestration AI continuously optimizes org structure Task "
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 45,
+          "passage": "Figure 4 Evolving from cost efficiency to adaptive orchestration Adaptive Focus Cost efficiency Productivity Process redesign Value creation orchestration AI continuously optimizes org structure Task "
+        },
+        {
+          "category": "workforce_transformation",
+          "term": "workforce change",
+          "page": 46,
+          "passage": "Leaders can use digital twins to test decision-making and simulate scenarios, giving them Only 20% of leaders say they are currently using AI to monitor insights they can use to prioritize initiatives"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "artificial intelligence",
+          "page": 50,
+          "passage": "For example, organizations today need expertise from multiple func- Functions under pressure tions to realize value from artificial intelligence by redesigning work and optimizing human and machine in"
+        }
+      ]
+    },
+    "wef_2025": {
+      "source": "WEF Future of Jobs Report 2025",
+      "pages_read": 50,
+      "findings": [
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 3,
+          "passage": "3 Reskilling and upskilling strategies 45 4 Workforce strategies 49 4"
+        },
+        {
+          "category": "reskilling",
+          "term": "upskill",
+          "page": 3,
+          "passage": "3 Reskilling and upskilling strategies 45 4 Workforce strategies 49 4"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 5,
+          "passage": "Advancements in while growing working-age populations fuel technologies, particularly AI and information growth in education-related professions, such processing (86%); robotics and automation as high"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 5,
+          "passage": "Advancements in while growing working-age populations fuel technologies, particularly AI and information growth in education-related professions, such processing (86%); robotics and automation as high"
+        },
+        {
+          "category": "workforce_transformation",
+          "term": "workforce transformation",
+          "page": 5,
+          "passage": "employers\u2014collectively representing more than 14 million workers across 22 industry clusters and \u2013 Two demographic shifts are increasingly seen 55 economies from around the world\u2014to examine to be tran"
+        },
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 6,
+          "passage": "as Nursing Professionals, Social Work and Counselling Professionals and Personal Care Given these evolving skill demands, the scale of Aides are also expected to grow significantly workforce upskillin"
+        },
+        {
+          "category": "reskilling",
+          "term": "upskill",
+          "page": 6,
+          "passage": "as Nursing Professionals, Social Work and Counselling Professionals and Personal Care Given these evolving skill demands, the scale of Aides are also expected to grow significantly workforce upskillin"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 6,
+          "passage": "orient their business in response to AI, two-thirds plan to hire talent with specific AI skills, while 40% While global job numbers are projected to anticipate reducing their workforce where AI can gr"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 6,
+          "passage": "Wage strategies are driven primarily by dexterity, endurance and precision stand out goals of aligning wages with workers\u2019 productivity with notable net declines in skills demand, with and performance"
+        },
+        {
+          "category": "skills_obsolescence",
+          "term": "skill gap",
+          "page": 6,
+          "passage": "Green and energy transition roles, including Autonomous and Skill gaps are categorically considered the biggest Electric Vehicle Specialists, Environmental barrier to business transformation by Future"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "machine learning",
+          "page": 6,
+          "passage": "However, 11 would be unlikely to Big Data Specialists, Fintech Engineers, AI and receive the reskilling or upkskilling needed, leaving Machine Learning Specialists and Software their employment prospe"
+        },
+        {
+          "category": "workforce_transformation",
+          "term": "workforce transformation",
+          "page": 9,
+          "passage": "The appendix provides a corresponding workforce transformation strategies detailed overview of the report\u2019s survey and analysis companies plan to use to address these issues"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 11,
+          "passage": "6 risk that technological development will be focused on replacing human work, which could increase While the full extent of long-term productivity inequality and unemployment"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 11,
+          "passage": "5 This disparity or quality of output \u2013 are more likely to come about mirrors broader trends, with advanced and middle- if technology development is focused on enhancing income economies experiencing "
+        },
+        {
+          "category": "ai_adoption",
+          "term": "AI adoption",
+          "page": 11,
+          "passage": "11 Outcomes such as the way in AI adoption, while industries such as these \u2013 which create genuine shifts in the quantity construction are lagging behind"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 12,
+          "passage": "organizations prioritize training that delivers immediate workplace productivity gains"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 13,
+          "passage": "This shift toward geoeconomic fragmentation The 2024 economic performance was marked by a carries substantial macroeconomic implications, global decrease in inflation and an unusually resilient with t"
+        },
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 15,
+          "passage": "These these industries,26 decarbonization will significantly two trends rank 3rd and 6th, respectively, among transform these industries and their workforces, the drivers of business transformation id"
+        },
+        {
+          "category": "reskilling",
+          "term": "upskill",
+          "page": 15,
+          "passage": "These these industries,26 decarbonization will significantly two trends rank 3rd and 6th, respectively, among transform these industries and their workforces, the drivers of business transformation id"
+        },
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 16,
+          "passage": "In higher-income nations, populations as a driver of transformation plan aging populations are increasing dependency to prioritize reskilling and upskilling, with 92% ratios, potentially putting great"
+        },
+        {
+          "category": "reskilling",
+          "term": "upskill",
+          "page": 16,
+          "passage": "In higher-income nations, populations as a driver of transformation plan aging populations are increasing dependency to prioritize reskilling and upskilling, with 92% ratios, potentially putting great"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 16,
+          "passage": "27 shrinking labour forces might increasingly look to Despite a global 12% increase in workers acquiring deeper automation to counterbalance some of these green skills between 2022 and 2023, demand de"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 16,
+          "passage": "27 shrinking labour forces might increasingly look to Despite a global 12% increase in workers acquiring deeper automation to counterbalance some of these green skills between 2022 and 2023, demand de"
+        },
+        {
+          "category": "automation",
+          "term": "displaced",
+          "page": 18,
+          "passage": "Specifically, and displaced due to labour-market transformation macrotrend-driven creation of new jobs is estimated relative to total employment today"
+        },
+        {
+          "category": "job_displacement",
+          "term": "job displacement",
+          "page": 18,
+          "passage": "This growth is expected expectations with hard data on global employment to be offset by the displacement of 92 million collected by the ILO, the Future of Jobs Report current jobs, or 8% of total emp"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "machine learning",
+          "page": 19,
+          "passage": "2 Fastest-growing and fastest-declining jobs, 2025-2030 Top jobs by fastest net growth and net decline, projected by surveyed employers Top fastest growing jobs Big Data Specialists FinTech Engineers "
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 21,
+          "passage": "Blockchain Developers Building Framers, Finishers, and Related Trades Workers Data Engineers Sales and Purchasing Agents and Brokers Digital Transformation Specialists Chemical Processing Plant Operat"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 21,
+          "passage": "Blockchain Developers Building Framers, Finishers, and Related Trades Workers Data Engineers Sales and Purchasing Agents and Brokers Digital Transformation Specialists Chemical Processing Plant Operat"
+        },
+        {
+          "category": "automation",
+          "term": "displaced",
+          "page": 21,
+          "passage": "3Water Transportation Workers Transportation Attendants and Conductors Industrial and Production Engineers Material-Recording and Stock-Keeping Clerks Chefs and Cooks Accounting, Bookkeeping and Payro"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "machine learning",
+          "page": 21,
+          "passage": "Big Data Specialists Chemists and Chemical Laboratory Scientists FinTech Engineers Mechanical Engineers AI and Machine Learning Specialists Architects and Surveyors Software and Applications Developer"
+        },
+        {
+          "category": "job_displacement",
+          "term": "job displacement",
+          "page": 21,
+          "passage": "The projected net growth or decline for each occupation over the next five years (diamonds) is calculated by subtracting total job displacement from total job creation"
+        },
+        {
+          "category": "automation",
+          "term": "displaced",
+          "page": 24,
+          "passage": "Projected net number of jobs created or displaced for each occupation over the next five years (diamonds) is calculated by subtracting total job displacement from total job creation"
+        },
+        {
+          "category": "job_displacement",
+          "term": "job displacement",
+          "page": 24,
+          "passage": "Projected net number of jobs created or displaced for each occupation over the next five years (diamonds) is calculated by subtracting total job displacement from total job creation"
+        },
+        {
+          "category": "automation",
+          "term": "displaced",
+          "page": 25,
+          "passage": "8M Jobs created Jobs displaced Net effect Source World Economic Forum, Future of Jobs Survey 2024; International Labour Organization, ILOSTAT"
+        },
+        {
+          "category": "job_displacement",
+          "term": "job displacement",
+          "page": 25,
+          "passage": "6 Expected impact of macrotrends and technology trends on jobs, 2025-2030 Projected job creation attributed to each trend (blue) and projected job displacement attributed to each trend (purple) betwee"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 26,
+          "passage": "In addition, of the 10 fastest- and 10 largest-declining roles, only two (Printing and The Shifting human-machine frontier: Related Trades Workers, and Building Caretakers, automation versus augmentat"
+        },
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 27,
+          "passage": "1), talent development, reskilling and upskilling strategies may be designed and delivered in a way to enable and optimize human-machine collaboration"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 27,
+          "passage": "8 Expected shift in the human share of work task delivery in total firm output driven by automation versus augmentation, 2025-2030, global average Change in proportion of human-performed tasks attribu"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 27,
+          "passage": "8 Expected shift in the human share of work task delivery in total firm output driven by automation versus augmentation, 2025-2030, global average Change in proportion of human-performed tasks attribu"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 28,
+          "passage": "9 Expected shift in the human share of work task delivery in total firm output driven by automation versus augmentation, 2025-2030, by industry Change in proportion of human-performed tasks attributab"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 28,
+          "passage": "9 Expected shift in the human share of work task delivery in total firm output driven by automation versus augmentation, 2025-2030, by industry Change in proportion of human-performed tasks attributab"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "machine learning",
+          "page": 31,
+          "passage": "Growth in roles driven shop salespersons, wholesale and manufacturing by increasing cost of living is concentrated in sales representatives, food and beverage serving jobs associated with finding ways"
+        },
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 32,
+          "passage": "The accelerated reskilling programmes, enabling companies to better adoption of digital tools, remote work solutions, and anticipate and manage future skill requirements"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "machine learning",
+          "page": 32,
+          "passage": "This advanced technologies such as machine learning is reflected in an increasing share of the workforce and generative AI provided companies with relevant (50%) having completing training as part of "
+        },
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 43,
+          "passage": "closely linked to digital transformation, reflecting the rising importance of delivering seamless digital These findings underscore an urgent need for experiences and understanding the impact of appro"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 43,
+          "passage": "automated systems across a range of industries"
+        },
+        {
+          "category": "reskilling",
+          "term": "upskill",
+          "page": 44,
+          "passage": "potential is in skills that can be effectively For employers, these insights emphasize the need performed by leveraging theoretical knowledge for training and upskilling initiatives that focus on alon"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "artificial intelligence",
+          "page": 44,
+          "passage": "Artificial intelligence and big data Reading, writing and mathematics Marketing and media Systems thinking Multi-lingualism Programming Financial management Dependability and attention to detail Curio"
+        },
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 45,
+          "passage": "3 Reskilling and upskilling strategies Having anticipated significant skill disruptions, 50% of their workforce has completed training as employers have increasingly invested in reskilling part of the"
+        },
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 47,
+          "passage": "9 provides an overview Information and Technology Services, which of expectations around workforce training needs saw some of the largest uptake in reskilling and by 2030"
+        }
+      ]
+    },
+    "frey_osborne": {
+      "source": "Frey & Osborne 2013 \u2014 The Future of Employment",
+      "pages_read": 50,
+      "findings": [
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 1,
+          "passage": "THE FUTURE OF EMPLOYMENT: HOW SUSCEPTIBLE ARE JOBS TO COMPUTERISATION? \u2217 Carl Benedikt Frey and Michael A"
+        },
+        {
+          "category": "job_displacement",
+          "term": "jobs at risk",
+          "page": 1,
+          "passage": "Based on these estimates, we examine ex- pectedimpactsoffuturecomputerisation onUS labourmarketoutcomes, with the primary objective of analysing the number of jobs at risk and the relationship between"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 2,
+          "passage": "3 In ad- 1We refer to computerisation as job automation by means of computer-controlled equip- ment"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 2,
+          "passage": "INTRODUCTION Inthispaper,weaddressthequestion: howsusceptiblearejobstocomputerisa- tion? Doing so, we build on the existing literature in two ways"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 2,
+          "passage": "3 In ad- 1We refer to computerisation as job automation by means of computer-controlled equip- ment"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "machine learning",
+          "page": 2,
+          "passage": "First, drawing upon recent advances in Machine Learning (ML) and Mobile Robotics (MR), we develop a novel methodology to categorise occupations according to their susceptibilityto computerisation"
+        },
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 3,
+          "passage": "At the same time, with falling prices of computing, problem-solving skills arebecomingrelativelyproductive,explainingthesubstantialemploymentgrowth inoccupationsinvolvingcognitivetaskswhereskilledlabo"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 3,
+          "passage": "Less than ten years ago, in the chapter \u201cWhy People Still Matter\u201d, Levy andMurnane(2004)pointedatthedifficultiesofreplicatinghumanperception, asserting that driving in traffic is insusceptible to auto"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 3,
+          "passage": "dition to the computerisation of routine manufacturing tasks, Autor and Dorn (2013) document a structural shift in the labour market, with workers reallo- cating their labour supply from middle-income"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 3,
+          "passage": "The autonomous driverless cars, developed by Google, provide one example of how manual tasks in transport and logistics may soon be automated"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 4,
+          "passage": "useful frameworks for examining the impact of computers on the occupational employment composition, they seem inadequate in explaining the impact of technological trends going beyond the computerisati"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 4,
+          "passage": "In the present study, wewillarguethatlegalwritingandtruckdrivingwillsoonbeautomated,while persuading, for instance, will not"
+        },
+        {
+          "category": "job_displacement",
+          "term": "jobs at risk",
+          "page": 4,
+          "passage": "The characteristics of these problems were matched to dif- ferent occupational characteristics, using O NET data, allowing us to examine \u2217 thefuture directionof technologicalchange in termsof itsimpac"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 5,
+          "passage": "The extent of computerisation is therefore likely to go beyond that of offshoring"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 5,
+          "passage": "Naturally, the characteristics of occupations that can be offshored are different from the characteristics ofoccupationsthat can beautomated"
+        },
+        {
+          "category": "skills_obsolescence",
+          "term": "obsolete",
+          "page": 6,
+          "passage": "MostlikelytheQueen\u2019sconcernwasamanifestationofthehosiers\u2019guildsfear that the invention would make the skills of its artisan members obsolete"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 7,
+          "passage": "Afterthemidnineteenthcentury,however,realwagesbegantogrowinline withproductivity"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 7,
+          "passage": "Finally, Allen (2009a) findsthatoverthefirsthalfofthenineteenthcentury,therealwagestagnatedwhileoutputper workerexpanded"
+        },
+        {
+          "category": "skills_obsolescence",
+          "term": "obsolete",
+          "page": 8,
+          "passage": "This implies that although manufacturing technologies made the skills of artisans obsolete, gains from technological progress were distributed in a manner that graduallybenefited agrowingshareofthelab"
+        },
+        {
+          "category": "reskilling",
+          "term": "reskill",
+          "page": 9,
+          "passage": "7): \u201ctheidea that technologicaladvances favor moreskilledworkers is a twentieth century phenomenon"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 10,
+          "passage": "Overthecourseof thenineteenthcentury,establishmentsbecame larger in size as steam and water power technologies improved, allowing them toadoptpoweredmachinerytorealizeproductivitygainsthroughthecombin"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 11,
+          "passage": "13 At thesame time, bar-code scanners and cash machines were spreading across the retail and fi- nancialindustries,andthefirstpersonalcomputerswereintroducedintheearly 1980s, with their word processin"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 12,
+          "passage": "Autor and Dorn (2013), for example, show that as computerisation erodes wages for labour performing routine tasks, workers will reallocate their labour supply to relatively low-skill service occupatio"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 12,
+          "passage": "In a similar manner, com- puterisation augments demand for such tasks, but it also permits them to be automated(Autor,et al"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 12,
+          "passage": "Seen from a production function perspec- tive,anoutwardshiftinthesupplyofroutineinformationalinputsincreasesthe marginal productivityof workers they are demanded by"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 13,
+          "passage": "This the routine-intensityof employmentis thus likely to result from a combinationof offshoring andautomation"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 13,
+          "passage": "Yetascomputerisa- tion enters more cognitive domains this will become increasingly challenging (BrynjolfssonandMcAfee,2011)"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 13,
+          "passage": "This the routine-intensityof employmentis thus likely to result from a combinationof offshoring andautomation"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 13,
+          "passage": "First,as technologysubstitutesforlabour,thereisadestructioneffect,requiringworkers toreallocatetheirlaboursupply;andsecond,thereisthecapitalisationeffect,as more companies enter industries where produ"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 14,
+          "passage": "The extent of job computerisation will thus be determined by technological advances that allow engineering problems to be sufficiently specified, which sets the boundaries for the scope of computerisa"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 14,
+          "passage": "Doing so, we focus on advances in fields related to Machine Learning (ML), including Data Mining, Machine Vision, Computational Statistics and other sub-fields of Artificial Intelligence (AI), in whic"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "artificial intelligence",
+          "page": 14,
+          "passage": "Doing so, we focus on advances in fields related to Machine Learning (ML), including Data Mining, Machine Vision, Computational Statistics and other sub-fields of Artificial Intelligence (AI), in whic"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "machine learning",
+          "page": 14,
+          "passage": "Doing so, we focus on advances in fields related to Machine Learning (ML), including Data Mining, Machine Vision, Computational Statistics and other sub-fields of Artificial Intelligence (AI), in whic"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 15,
+          "passage": "Historically, computerisation has largely been confined to manual and cognitive routine tasks involving explicit rule- based activities (Autor and Dorn, 2013; Goos, et al"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 15,
+          "passage": "\u201d Today, the problems of navigating a car and deciphering handwriting are sufficiently well understood that many related tasks can be specified in computercode and automated(Veres, et al"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 16,
+          "passage": "Further, ML algorithms can discover unexpected similarities between old andnewdata,aidingthecomputerisationoftasksforwhichbigdatahas newly become available"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 17,
+          "passage": "In health care, diagnostics tasks are already being computerised"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 18,
+          "passage": "More- over, a company called SmartAction now provides call computerisation solu- tionsthatuseML technologyandadvancedspeechrecognitiontoimproveupon conventionalinteractivevoiceresponsesystems,realisin"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 19,
+          "passage": "Even the work of software engineers may soon largely be computerisable"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 20,
+          "passage": "Computerisationinnon-routinemanualtasks Mobile robotics provides a means of directly leveraging ML technologies to aid the computerisation of a growing scope of manual tasks"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 21,
+          "passage": "The computerisation of mining vehicles is further being pursued by companies such as Rio Tinto, seeking to replace labour in Aus- tralianmine-sites"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 22,
+          "passage": "This means that many low-wage manual jobs that have been previously protected from computerisationcould diminishovertime"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 22,
+          "passage": "(2003) has delivered intuitive and accurate predictions in that: (a) computers are more substitutable for human labour in routine relative to non-routine tasks; and (b) a greater intensity of routine "
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 23,
+          "passage": "monly defined as non-routine (Brynjolfsson and McAfee, 2011), meaning that the task model will not hold in predicting the impact of computerisation on the task content of employment in the twenty-firs"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 23,
+          "passage": "It further assumes income-maximizing workers, with heterogeneous productivityendowments in both susceptible and non-susceptible tasks"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 24,
+          "passage": "substitution will be confined to routine tasks, our model predicts that comput- erisationcanbeextendedtoanynon-routinetaskthatisnotsubjecttoanyengi- neering bottlenecks to computerisation"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 25,
+          "passage": "As such, tasks that relate to an unstructured work environment can make jobs less susceptibleto computerisation"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 26,
+          "passage": "Instead, the principal obstacle to computerising creativity is stating our creative values sufficiently clearly that they can be encoded in an program (Boden, 2003)"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 27,
+          "passage": "We proceed to examining thesusceptibilityofjobstocomputerisationasafunctionoftheabovedescribed 27"
+        },
+        {
+          "category": "automation",
+          "term": "computeris",
+          "page": 28,
+          "passage": "Asketchofhowtheprobabilityofcomputerisationmightvaryasafunctionof bottleneckvariables"
+        }
+      ]
+    },
+    "mckinsey": {
+      "source": "McKinsey State of AI 2025",
+      "pages_read": 30,
+      "findings": [
+        {
+          "category": "ai_adoption",
+          "term": "artificial intelligence",
+          "page": 3,
+          "passage": "T hree years since the introduction of gen AI tools triggered a new era of artificial intelligence, nearly nine out of ten survey respondents say their organizations are regularly using AI\u2014but the pac"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 8,
+          "passage": "But our latest findings show or customer service automation"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 8,
+          "passage": "But our latest findings show or customer service automation"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 15,
+          "passage": "Objectives of AI efforts at respondents\u2019 organizations,\u00b9 % of respondents Efficiency (eg, reducing costs Growth (eg, increasing Innovation (eg, creating by automating workflows) revenues through impro"
+        },
+        {
+          "category": "automation",
+          "term": "automation",
+          "page": 16,
+          "passage": "As a result, leading organizations are not just seeing improved automation results; they are redesigning workflows and customer experiences to capture new forms of value"
+        },
+        {
+          "category": "automation",
+          "term": "automat",
+          "page": 16,
+          "passage": "As a result, leading organizations are not just seeing improved automation results; they are redesigning workflows and customer experiences to capture new forms of value"
+        },
+        {
+          "category": "productivity",
+          "term": "productivity",
+          "page": 16,
+          "passage": "In our experience, many of the organizations that use AI to inspire growth and innovation are the same ones that find it easier to scale AI use and ultimately realize sustainable productivity improvem"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "AI adoption",
+          "page": 18,
+          "passage": "These respondents are also much more likely than others are to say that senior leaders are actively engaged in driving AI adoption, including role modeling the use of AI"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 19,
+          "passage": "For example, high performers are more likely than others are to say their organizations have defined processes to determine how and when model outputs need human validation to ensure accuracy (Exhibit"
+        },
+        {
+          "category": "reskilling",
+          "term": "upskill",
+          "page": 20,
+          "passage": "0\u00d7 Talent AI upskilling: Have curated learning journeys, tailored by role, to build critical AI 24 34 skills for technical talent (e1g6, data scientists, data engineers) Talent AI talent strategy: Hav"
+        },
+        {
+          "category": "productivity",
+          "term": "output",
+          "page": 20,
+          "passage": "Organizations engaging in each practice,\u00b9 % of respondents AI high performers\u00b2 (n = 109) All other respondents (n = 1,643) Highest prevalence Strategy Human in the loop: Have defined processes to dete"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "machine learning",
+          "page": 25,
+          "passage": "Share of organizations that have hired given role within the past year,\u00b9 % of respondents Organizations with <$1 billion in revenues (n = 1,034) Organizations with \u0141$1 billion in revenues (n = 662) 30"
+        },
+        {
+          "category": "ai_adoption",
+          "term": "AI adoption",
+          "page": 26,
+          "passage": "Some of these jobs will become more critical as AI adoption increases"
+        }
+      ]
+    }
+  }
+}

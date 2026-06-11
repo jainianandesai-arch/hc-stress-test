@@ -1,0 +1,115 @@
+{
+  "federal": {
+    "jurisdiction": "Federal",
+    "legislation": "Canada Labour Code \u2014 R.S.C. 1985, c. L-2",
+    "source_url": "https://laws-lois.justice.gc.ca/eng/acts/L-2/page-1.html",
+    "applies_to": "Banks, telecoms, airlines, Crown corporations \u2014 RBC, TD, Scotiabank, Bell, Air Canada",
+    "termination_notice": {
+      "3_months_to_1_year": "2 weeks",
+      "1_to_3_years": "2 weeks",
+      "3_to_4_years": "3 weeks",
+      "4_to_5_years": "4 weeks",
+      "5_to_6_years": "5 weeks",
+      "6_to_7_years": "6 weeks",
+      "7_to_8_years": "7 weeks",
+      "8_plus_years": "8 weeks"
+    },
+    "severance_pay": "2 days per year of service \u2014 minimum 5 days",
+    "group_termination": {
+      "50_to_100": "8 weeks notice",
+      "101_to_300": "12 weeks notice",
+      "301_plus": "16 weeks notice"
+    },
+    "rbc_note": "RBC is a Schedule I bank \u2014 federally regulated \u2014 Canada Labour Code applies, NOT provincial ESA",
+    "scraped_at": "2026-06-09T18:33:13.493577",
+    "status": "\u2705 Live"
+  },
+  "ontario": {
+    "jurisdiction": "Ontario",
+    "legislation": "Employment Standards Act 2000 \u2014 O. Reg. 288/01",
+    "source_url": "https://www.ontario.ca/document/your-guide-employment-standards-act/termination-employment",
+    "termination_pay": {
+      "less_than_1_year": "1 week",
+      "1_to_2_years": "2 weeks",
+      "2_to_3_years": "3 weeks",
+      "3_to_4_years": "4 weeks",
+      "4_to_5_years": "5 weeks",
+      "5_to_6_years": "6 weeks",
+      "6_to_7_years": "7 weeks",
+      "7_plus_years": "8 weeks maximum"
+    },
+    "severance_pay": {
+      "rule": "1 week per year of service \u2014 no cap",
+      "applies_when": "5+ years service AND employer payroll over $2.5M",
+      "note": "Separate from termination pay \u2014 both can apply simultaneously"
+    },
+    "mass_termination": {
+      "50_to_199": "8 weeks",
+      "200_to_499": "12 weeks",
+      "500_plus": "16 weeks"
+    },
+    "common_law_notice": "Up to 1 month per year \u2014 maximum typically 24 months for senior staff",
+    "scraped_at": "2026-06-09T18:33:14.531204",
+    "status": "\u2705 Live"
+  },
+  "british_columbia": {
+    "jurisdiction": "British Columbia",
+    "legislation": "Employment Standards Act \u2014 RSBC 1996 c.113",
+    "source_url": "https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/termination",
+    "termination_pay": {
+      "3_months_to_1_year": "1 week",
+      "1_to_2_years": "2 weeks",
+      "2_to_3_years": "3 weeks",
+      "3_plus_years": "1 week per year up to 8 weeks maximum"
+    },
+    "group_termination": "50+ employees \u2014 8 weeks notice to Minister of Labour",
+    "scraped_at": "2026-06-09T18:33:15.230093",
+    "status": "\u2705 Live"
+  },
+  "quebec": {
+    "jurisdiction": "Quebec",
+    "legislation": "Act Respecting Labour Standards \u2014 CQLR c. N-1.1",
+    "source_url": "https://www.cnesst.gouv.qc.ca/en/working-conditions/termination-employment/notice-termination-employment-and-indemnity",
+    "notice_of_termination": {
+      "3_months_to_1_year": "1 week",
+      "1_to_5_years": "2 weeks",
+      "5_to_10_years": "4 weeks",
+      "10_plus_years": "8 weeks"
+    },
+    "collective_dismissal": {
+      "threshold": "10+ employees within 2 months",
+      "notice_to_minister": "60 days advance notice required"
+    },
+    "french_language_requirement": "All termination documents must be available in French \u2014 Charter of the French Language Bill 101",
+    "scraped_at": "2026-06-09T18:33:16.149045",
+    "status": "\u2705 Live"
+  },
+  "alberta": {
+    "jurisdiction": "Alberta",
+    "legislation": "Employment Standards Code \u2014 RSA 2000 c.E-9",
+    "source_url": "https://www.alberta.ca/employment-standards-termination-and-lay-off",
+    "termination_pay": {
+      "90_days_to_2_years": "1 week",
+      "2_to_4_years": "2 weeks",
+      "4_to_6_years": "4 weeks",
+      "6_to_8_years": "5 weeks",
+      "8_to_10_years": "6 weeks",
+      "10_plus_years": "8 weeks maximum"
+    },
+    "group_termination": "50+ employees \u2014 4 weeks notice to Minister",
+    "note": "No separate statutory severance pay in Alberta",
+    "scraped_at": "2026-06-09T18:33:16.423551",
+    "status": "\u2705 Live"
+  },
+  "severance_calculator": {
+    "function": "calculate_severance(jurisdiction, years_service, weekly_pay, annual_payroll)",
+    "jurisdictions_supported": [
+      "Federal",
+      "Ontario",
+      "BC",
+      "Quebec",
+      "Alberta"
+    ],
+    "note": "Federal rules apply to RBC and all Schedule I banks"
+  }
+}
