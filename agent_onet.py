@@ -12,9 +12,7 @@ import requests
 import json
 import os
 from datetime import datetime
-from dotenv import load_dotenv
 
-load_dotenv()
 
 # ── Credentials ───────────────────────────────────────────────
 API_KEY  = os.getenv("ONET_PASSWORD", "f3gB5-DGRYM-H3EGe-atz4K")
