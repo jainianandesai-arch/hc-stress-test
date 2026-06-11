@@ -534,7 +534,9 @@ with tab1:
     )
 
     if not run:
+        st.markdown("Configure your organization above and click **▶ Run Transformation Analysis** to see results.")
         st.stop()
+       
 
     if total_pct != 100:
         st.error("Function percentages must total 100%.")
