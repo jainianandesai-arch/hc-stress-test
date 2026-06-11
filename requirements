@@ -1,10 +1,6 @@
+streamlit
 pandas
 numpy
-faker
-scipy
-scikit-learn
-lifelines
-plotly
-streamlit
-reportlab
-openpyxl
+requests
+pulp
+dotenv
